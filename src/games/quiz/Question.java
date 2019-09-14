@@ -1,4 +1,5 @@
-import java.lang.reflect.Array;
+package games.quiz;
+
 import java.util.Objects;
 
 public class Question
@@ -12,12 +13,6 @@ public class Question
         this.question = question;
         this.answer = answer;
         this.id = id;
-    }
-
-    public Question(int id, String[] inp) throws IllegalArgumentException
-    {
-        if (inp.length < 2) throw new IllegalArgumentException("wrong count");
-        new Question(id, inp[0], inp[1]);
     }
 
     public boolean check(String userAnswer)

@@ -2,15 +2,31 @@ package core;
 
 public class User<T extends Comparable>
 {
-    public Class<T> idClass;
     public T id;
     public String state;
     public String userPlatform;
 
-    public User(T id, String userPlatform, Class<T> idClass)
+    public User(T id, String userPlatform)
     {
         this.id = id;
         this.userPlatform = userPlatform;
-        this.idClass = idClass;
+    }
+
+    @Override
+    public int hashCode()
+    {
+        String builder = id.toString() + userPlatform.toLowerCase();
+        return builder.hashCode();
+    }
+
+    @Override
+    public boolean equals(Object obj)
+    {
+        if (obj instanceof User<?>)
+        {
+            var other = (User<?>) obj;
+            return other.id.compareTo(id) == 0 && other.userPlatform.equals(userPlatform);
+        }
+        return false;
     }
 }

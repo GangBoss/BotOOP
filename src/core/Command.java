@@ -2,6 +2,5 @@ package core;
 
 public interface Command
 {
-    public void execute();
-
+    void execute(MessageHandlable bot, User user);
 }
