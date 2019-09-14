@@ -6,11 +6,11 @@ import core.Bot;
 import java.util.Collection;
 import java.util.LinkedHashMap;
 
-public class HandlerSet extends BasicSet<BaseHandler>
+public class HandlerSet extends BasicSet<BaseHandler, LinkedHashMap<String, BaseHandler>>
 {
-
     public HandlerSet(Bot bot, boolean withUser)
     {
+        set = new LinkedHashMap<>();
         prefixCount = 0;
         suffixCount = 7;
         //Should be last always

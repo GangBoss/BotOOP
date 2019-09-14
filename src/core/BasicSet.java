@@ -1,11 +1,11 @@
 package core;
 
 import java.util.Collection;
-import java.util.HashMap;
+import java.util.Map;
 
-public abstract class BasicSet<T>
+public abstract class BasicSet<T, V extends Map<String, T>>
 {
-    protected HashMap<String, T> set = new HashMap<String, T>();
+    protected V set;
     protected int prefixCount;
     protected int suffixCount;
 

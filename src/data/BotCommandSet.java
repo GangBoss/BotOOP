@@ -6,10 +6,13 @@ import data.commands.ExitCommand;
 import data.commands.ListCommand;
 import data.commands.QuizCommand;
 
-public class BotCommandSet extends BasicSet<CommandBase>
+import java.util.HashMap;
+
+public class BotCommandSet extends BasicSet<CommandBase, HashMap<String,CommandBase>>
 {
     public BotCommandSet()
     {
+        set = new HashMap<>();
         prefixCount = 0;
         suffixCount = 7;
 
