@@ -49,8 +49,10 @@ public class Bot implements MessageHandlable
     public void handleMessage(String message, User user)
     {
         message = message.toLowerCase();
+
         if (database.hasUser(user)) user = database.getUser(user);
-        database.addUser(user);
+        else database.addUser(user);
+
         if (user.state != null && !user.state.isEmpty())
             games.find(user.state).handleMessage(message, user);
 
