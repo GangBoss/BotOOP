@@ -1,4 +1,4 @@
-package bot;
+package console;
 
 import core.Bot;
 

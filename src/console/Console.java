@@ -1,10 +1,5 @@
 package console;
 
-import bot.BotStarter;
-import core.Bot;
-import core.User;
-import games.quiz.Converter;
-
 import java.util.Scanner;
 
 public class Console
