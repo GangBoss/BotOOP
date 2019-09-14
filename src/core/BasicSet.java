@@ -1,10 +1,5 @@
 package core;
 
-import data.commands.CommandBase;
-import data.commands.ExitCommand;
-import data.commands.ListCommand;
-import data.commands.QuizCommand;
-
 import java.util.Collection;
 import java.util.HashMap;
 

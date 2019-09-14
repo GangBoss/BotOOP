@@ -15,8 +15,8 @@ public class Question
         this.id = id;
     }
 
-    public boolean check(String userAnswer)
+    public boolean isRight(String userAnswer)
     {
-        return Objects.equals(userAnswer, answer);
+        return Objects.equals(userAnswer.toLowerCase(), answer);
     }
 }

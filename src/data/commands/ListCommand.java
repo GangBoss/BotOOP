@@ -1,14 +1,15 @@
 package data.commands;
 
+import core.CommandBase;
 import core.MessageHandlable;
 import core.User;
-import data.CommandSet;
+import data.BotCommandSet;
 
 public class ListCommand extends CommandBase
 {
-    private CommandSet commands;
+    private BotCommandSet commands;
 
-    public ListCommand(CommandSet commands)
+    public ListCommand(BotCommandSet commands)
     {
         super("Print all commands");
         this.commands = commands;

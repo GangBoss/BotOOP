@@ -1,11 +1,11 @@
-package data.commands;
+package core;
 
 
 import core.Command;
 
 public abstract class CommandBase implements Command
 {
-    final String info;
+    public final String info;
 
     public CommandBase(String info)
     {

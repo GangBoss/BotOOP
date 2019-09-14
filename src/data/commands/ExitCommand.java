@@ -1,6 +1,7 @@
 package data.commands;
 
 import core.Bot;
+import core.CommandBase;
 import core.MessageHandlable;
 import core.User;
 
