@@ -5,19 +5,13 @@ import games.GameSet;
 import data.user.UserDatabase;
 import handlers.HandlerSet;
 
-public class Bot implements MessageHandlable
+public class Bot extends Runner implements MessageHandlable
 {
     private BotCommandSet commands = new BotCommandSet();
     private UserDatabase database = new UserDatabase();
     private HandlerSet handlers;
     public final GameSet games;
-    private boolean isStopped = true;
     private boolean withUser;
-
-    public boolean getIsStopped()
-    {
-        return isStopped;
-    }
 
     public Bot(boolean withUser) throws Exception
     {

@@ -1,8 +1,6 @@
 package handlers;
 
 import core.Bot;
-import core.MessageHandlable;
-import core.Runner;
 import core.User;
 
 import java.util.Scanner;
@@ -31,14 +29,14 @@ public class ConsoleHandler extends BaseHandler
     @Override
     public void start()
     {
-        isStoped = false;
+        isStopped = false;
         Scanner console = new Scanner(System.in);
         System.out.println("Enter your name:");
         var name = console.nextLine();
 
         var user = new User<>(name, "console");
         System.out.println("Enter \"list\" to view all commands.");
-        while (!getIsStoped())
+        while (!getIsStopped())
         {
             var input = console.nextLine();
             handleMessage(input, user);
@@ -48,6 +46,6 @@ public class ConsoleHandler extends BaseHandler
     @Override
     public void stop()
     {
-        isStoped = true;
+        isStopped = true;
     }
 }

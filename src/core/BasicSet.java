@@ -17,7 +17,7 @@ public abstract class BasicSet<T, V extends Map<String, T>>
             name = enclosingClass.getSimpleName().toLowerCase();
         else name = item.getClass().getSimpleName().toLowerCase();
         name = name.substring(prefixCount, name.length() - suffixCount);
-        set.put(name,item);
+        set.put(name, item);
     }
 
     public T find(String name)

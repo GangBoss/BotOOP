@@ -2,11 +2,11 @@ package core;
 
 public abstract class Runner
 {
-    protected boolean isStoped = true;
+    protected boolean isStopped = true;
 
-    public boolean getIsStoped()
+    public boolean getIsStopped()
     {
-        return isStoped;
+        return isStopped;
     }
 
     public abstract void start();
