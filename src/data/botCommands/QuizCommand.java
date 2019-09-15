@@ -1,20 +1,20 @@
-package data.commands;
+package data.botCommands;
 
 import core.Bot;
 import core.CommandBase;
 import core.MessageHandlable;
 import core.User;
 
-public class ExitCommand extends CommandBase
+public class QuizCommand extends CommandBase
 {
-    public ExitCommand()
+    public QuizCommand()
     {
-        super("Exit from program.");
+        super("Start playing quiz");
     }
 
     @Override
     public void execute(MessageHandlable bot, User user)
     {
-        ((Bot)bot).stop();
+        ((Bot)bot).games.find("quiz").start(user);
     }
 }

@@ -3,6 +3,7 @@ package games.quiz;
 import core.Bot;
 import core.User;
 import games.BaseGame;
+import games.quiz.commands.QuizCommandSet;
 
 import java.util.HashMap;
 import java.util.Random;

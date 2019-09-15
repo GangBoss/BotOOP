@@ -1,9 +1,8 @@
-package data.commands;
+package data.botCommands;
 
 import core.CommandBase;
 import core.MessageHandlable;
 import core.User;
-import data.BotCommandSet;
 
 public class ListCommand extends CommandBase
 {

@@ -1,6 +1,6 @@
 package core;
 
-import data.BotCommandSet;
+import data.botCommands.BotCommandSet;
 import games.GameSet;
 import data.user.UserDatabase;
 import handlers.HandlerSet;
