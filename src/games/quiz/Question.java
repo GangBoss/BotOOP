@@ -8,6 +8,11 @@ public class Question
     public int id;
     private String answer;
 
+    public String getAnswer()
+    {
+        return answer;
+    }
+
     public Question(int id, String question, String answer)
     {
         this.question = question;

@@ -33,6 +33,7 @@ public class Quiz extends BaseGame
         sendMessage(questions.get(uData.currentQuestionId).question, user);
     }
 
+
     private int getRandomQuestionId()
     {
         Random generator = new Random();
@@ -43,6 +44,16 @@ public class Quiz extends BaseGame
     public void stop(User user)
     {
         user.state = "";
+    }
+
+    public void next(User user)
+    {
+
+        var quizData = data.get(user);
+        sendMessage("Right: "+questions.get(quizData.currentQuestionId).getAnswer(),user);
+        quizData.currentQuestionId = getRandomQuestionId();
+        sendMessage("Go next", user);
+        sendMessage(questions.get(quizData.currentQuestionId).question, user);
     }
 
     @Override
