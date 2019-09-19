@@ -5,13 +5,11 @@ public class User<T extends Comparable>
     public T id;
     public String state;
     public String userPlatform;
-    public int wa;
 
     public User(T id, String userPlatform)
     {
         this.id = id;
         this.userPlatform = userPlatform;
-        wa=0;
     }
 
     @Override
