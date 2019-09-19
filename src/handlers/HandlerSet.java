@@ -2,6 +2,7 @@ package handlers;
 
 import core.BasicSet;
 import core.Bot;
+import handlers.telegram.TelegramHandler;
 
 import java.util.Collection;
 import java.util.LinkedHashMap;
@@ -13,6 +14,7 @@ public class HandlerSet extends BasicSet<BaseHandler, LinkedHashMap<String, Base
         set = new LinkedHashMap<>();
         prefixCount = 0;
         suffixCount = 7;
+        add(new TelegramHandler(bot));
         //Should be last always
         if (withUser) add(new ConsoleHandler(bot));
     }

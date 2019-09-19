@@ -1,9 +1,10 @@
 package games;
 
 import core.MessageHandlable;
+import core.Runner;
 import core.User;
 
-public abstract class BaseGame implements MessageHandlable
+public abstract class BaseGame extends Runner implements MessageHandlable
 {
     public abstract void start(User user);
 

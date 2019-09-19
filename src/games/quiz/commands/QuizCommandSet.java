@@ -12,6 +12,7 @@ public class QuizCommandSet extends BasicSet<CommandBase, HashMap<String, Comman
     {
         set = new HashMap<>();
         suffixCount = 7;
+
         add(new ExitQuizCommand());
         add(new NextCommand());
     }
