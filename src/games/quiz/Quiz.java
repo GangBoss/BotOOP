@@ -24,7 +24,6 @@ public class Quiz extends BaseGame
         this.bot = bot;
     }
 
-    @Override
     public void start(User user)
     {
         if (!data.containsKey(user)) data.put(user, new QuizData());
@@ -35,10 +34,27 @@ public class Quiz extends BaseGame
         sendMessage(new Message(questions.get(uData.currentQuestionId).question, user));
     }
 
-    @Override
+
+    private int getRandomQuestionId()
+    {
+        Random generator = new Random();
+        var array = questions.keySet().toArray();
+        return (int) array[generator.nextInt(array.length)];
+    }
+
     public void stop(User user)
     {
         user.state = "";
+    }
+
+    public void next(User user)
+    {
+
+        var quizData = data.get(user);
+        sendMessage(new Message("Right: " + questions.get(quizData.currentQuestionId).getAnswer(), user));
+        quizData.currentQuestionId = getRandomQuestionId();
+        sendMessage(new Message("Go next", user));
+        sendMessage(new Message(questions.get(quizData.currentQuestionId).question, user));
     }
 
     @Override
@@ -63,22 +79,5 @@ public class Quiz extends BaseGame
         {
             sendMessage(new Message("Wrong answer", message.user));
         }
-    }
-
-    public void next(User user)
-    {
-
-        var quizData = data.get(user);
-        sendMessage(new Message("Right: " + questions.get(quizData.currentQuestionId).getAnswer(), user));
-        quizData.currentQuestionId = getRandomQuestionId();
-        sendMessage(new Message("Go next", user));
-        sendMessage(new Message(questions.get(quizData.currentQuestionId).question, user));
-    }
-
-    private int getRandomQuestionId()
-    {
-        Random generator = new Random();
-        var array = questions.keySet().toArray();
-        return (int) array[generator.nextInt(array.length)];
     }
 }
