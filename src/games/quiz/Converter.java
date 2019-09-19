@@ -7,7 +7,7 @@ import java.util.ArrayList;
 
 public final class Converter
 {
-    private static String firstPackage = System.getProperty("user.dir") + "\\src\\games\\quiz\\q.txt";
+    private static String firstPackage = System.getProperty("user.dir") + "\\res\\QuizQuestions.txt";
 
     public static ArrayList<Question> getQuestions(String path) throws Exception
     {
