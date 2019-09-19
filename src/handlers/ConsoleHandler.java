@@ -1,6 +1,7 @@
 package handlers;
 
 import core.Bot;
+import core.Message;
 import core.User;
 
 import java.util.Scanner;
@@ -15,15 +16,15 @@ public class ConsoleHandler extends BaseHandler
     }
 
     @Override
-    public void sendMessage(String message, User user)
+    public void sendMessage(Message message)
     {
-        System.out.println(message);
+        System.out.println(message.text);
     }
 
     @Override
-    public void handleMessage(String message, User user)
+    public void handleMessage(Message message)
     {
-        bot.handleMessage(message, user);
+        bot.handleMessage(message);
     }
 
     @Override
@@ -39,7 +40,7 @@ public class ConsoleHandler extends BaseHandler
         while (!getIsStopped())
         {
             var input = console.nextLine();
-            handleMessage(input, user);
+            handleMessage(new Message(input, user));
         }
     }
 

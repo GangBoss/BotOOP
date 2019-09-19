@@ -5,10 +5,13 @@ import games.GameSet;
 import data.user.UserDatabase;
 import handlers.HandlerSet;
 
+import java.util.ArrayDeque;
+
 public class Bot extends Runner implements MessageHandlable
 {
     private BotCommandSet commands = new BotCommandSet();
     private UserDatabase database = new UserDatabase();
+    private ArrayDeque<Message> messageQueue = new ArrayDeque<>();
     private HandlerSet handlers;
     public final GameSet games;
     private boolean withUser;
@@ -34,24 +37,30 @@ public class Bot extends Runner implements MessageHandlable
     }
 
     @Override
-    public void sendMessage(String message, User user)
+    public void sendMessage(Message message)
     {
-        handlers.find(user.userPlatform).sendMessage(message, user);
+        handlers.find(message.user.userPlatform).sendMessage(message);
+    }
+
+    public void AddMessageToHandle(Message message)
+    {
+
     }
 
     @Override
-    public void handleMessage(String message, User user)
+    public void handleMessage(Message message)
     {
-        message = message.toLowerCase();
+        message.text = message.text.toLowerCase();
 
-        if (database.hasUser(user)) user = database.getUser(user);
-        else database.addUser(user);
+        if (database.hasUser(message.user))
+            message.user = database.getUser(message.user);
+        else database.addUser(message.user);
 
-        if (user.state != null && !user.state.isEmpty())
-            games.find(user.state).handleMessage(message, user);
+        if (message.user.state != null && !message.user.state.isEmpty())
+            games.find(message.user.state).handleMessage(message);
 
-        else if (commands.hasCommand(message))
-            commands.find(message).execute(this, user);
-        else sendMessage("Invalid command", user);
+        else if (commands.hasCommand(message.text))
+            commands.find(message.text).execute(this, message.user);
+        else sendMessage(new Message("Invalid command", message.user));
     }
 }

@@ -1,6 +1,7 @@
 package games.quiz;
 
 import core.Bot;
+import core.Message;
 import core.User;
 import games.BaseGame;
 import games.quiz.commands.QuizCommandSet;
@@ -26,11 +27,11 @@ public class Quiz extends BaseGame
     public void start(User user)
     {
         if (!data.containsKey(user)) data.put(user, new QuizData());
-        sendMessage("Hello, you start quiz game. If you want exit from quiz type exitQuiz", user);
+        sendMessage(new Message("Hello, you start quiz game. If you want exit from quiz type exitQuiz", user));
         user.state = "quiz";
         var uData = data.get(user);
         uData.currentQuestionId = getRandomQuestionId();
-        sendMessage(questions.get(uData.currentQuestionId).question, user);
+        sendMessage(new Message(questions.get(uData.currentQuestionId).question, user));
     }
 
 
@@ -50,33 +51,33 @@ public class Quiz extends BaseGame
     {
 
         var quizData = data.get(user);
-        sendMessage("Right: "+questions.get(quizData.currentQuestionId).getAnswer(),user);
+        sendMessage(new Message("Right: " + questions.get(quizData.currentQuestionId).getAnswer(), user));
         quizData.currentQuestionId = getRandomQuestionId();
-        sendMessage("Go next", user);
-        sendMessage(questions.get(quizData.currentQuestionId).question, user);
+        sendMessage(new Message("Go next", user));
+        sendMessage(new Message(questions.get(quizData.currentQuestionId).question, user));
     }
 
     @Override
-    public void sendMessage(String message, User user)
+    public void sendMessage(Message message)
     {
-        bot.sendMessage(message, user);
+        bot.sendMessage(message);
     }
 
     @Override
-    public void handleMessage(String message, User user)
+    public void handleMessage(Message message)
     {
-        if (commands.hasCommand(message))
-            commands.find(message).execute(this, user);
-        else if (questions.get(data.get(user).currentQuestionId).isRight(message))
+        if (commands.hasCommand(message.text))
+            commands.find(message.text).execute(this, message.user);
+        else if (questions.get(data.get(message.user).currentQuestionId).isRight(message.text))
         {
-            var quizData = data.get(user);
+            var quizData = data.get(message.user);
             quizData.rightAnswers++;
             quizData.currentQuestionId = getRandomQuestionId();
-            sendMessage("Правильно", user);
-            sendMessage(questions.get(quizData.currentQuestionId).question, user);
+            sendMessage(new Message("Правильно", message.user));
+            sendMessage(new Message(questions.get(quizData.currentQuestionId).question, message.user));
         } else
         {
-            sendMessage("Wrong answer", user);
+            sendMessage(new Message("Wrong answer", message.user));
         }
     }
 }

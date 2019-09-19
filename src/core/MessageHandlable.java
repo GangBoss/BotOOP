@@ -2,7 +2,7 @@ package core;
 
 public interface MessageHandlable
 {
-    void sendMessage(String message, User user);
+    void sendMessage(Message message);
 
-    void handleMessage(String message, User user);
+    void handleMessage(Message message);
 }

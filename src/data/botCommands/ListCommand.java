@@ -1,6 +1,7 @@
 package data.botCommands;
 
 import core.CommandBase;
+import core.Message;
 import core.MessageHandlable;
 import core.User;
 
@@ -29,6 +30,6 @@ public class ListCommand extends CommandBase
 
             result.append(String.format("%s\t-\t %s\n", name, command.info));
         }
-        handler.sendMessage(result.toString(), user);
+        handler.sendMessage(new Message(result.toString(), user));
     }
 }
