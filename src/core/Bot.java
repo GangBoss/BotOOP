@@ -29,7 +29,6 @@ public class Bot extends Runner implements MessageHandlable
             return;
         isStopped = false;
         handlers.start();
-        if (withUser) stop();
     }
 
     public void stop()
