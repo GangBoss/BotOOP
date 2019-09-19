@@ -25,6 +25,8 @@ public class Bot extends Runner implements MessageHandlable
 
     public void start()
     {
+        if (!isStopped)
+            return;
         isStopped = false;
         handlers.start();
         if (withUser) stop();
@@ -32,7 +34,10 @@ public class Bot extends Runner implements MessageHandlable
 
     public void stop()
     {
+        if (isStopped)
+            return;
         isStopped = true;
+        System.out.println("Stopping...");
         handlers.stop();
     }
 

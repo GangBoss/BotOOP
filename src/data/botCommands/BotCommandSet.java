@@ -19,5 +19,6 @@ public class BotCommandSet extends BasicSet<CommandBase, HashMap<String,CommandB
         add(new ListCommand(this));
         add(new QuizCommand());
         add(new ExitCommand());
+        add(new StartCommand());
     }
 }

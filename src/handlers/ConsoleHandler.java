@@ -36,7 +36,7 @@ public class ConsoleHandler extends BaseHandler
         var name = console.nextLine();
 
         var user = new User<>(name, "console");
-        System.out.println("Enter \"list\" to view all commands.");
+        handleMessage(new Message("start", user));
         while (!getIsStopped())
         {
             var input = console.nextLine();

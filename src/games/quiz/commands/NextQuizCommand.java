@@ -5,10 +5,10 @@ import core.MessageHandlable;
 import core.User;
 import games.quiz.Quiz;
 
-public class NextCommand extends CommandBase
+public class NextQuizCommand extends CommandBase
 {
 
-    public NextCommand()
+    public NextQuizCommand()
     {
         super("Change question on Quiz");
     }

@@ -1,20 +1,21 @@
 package data.botCommands;
 
-import core.Bot;
-import core.CommandBase;
-import core.MessageHandlable;
-import core.User;
+import core.*;
 
 public class ExitCommand extends CommandBase
 {
+
     public ExitCommand()
     {
         super("Exit from program.");
+        includingPlatforms.add("console");
     }
 
     @Override
     public void execute(MessageHandlable bot, User user)
     {
-        ((Bot)bot).stop();
+        if (!hasIncludingPlatform(user.userPlatform))
+            bot.sendMessage(new Message("Invalid command", user));
+        else ((Bot) bot).stop();
     }
 }

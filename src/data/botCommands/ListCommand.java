@@ -21,6 +21,8 @@ public class ListCommand extends CommandBase
         StringBuilder result = new StringBuilder();
         for (var command : commands.getAll())
         {
+            if(!command.hasIncludingPlatform(user.userPlatform))
+                continue;
             Class<?> enclosingClass = command.getClass().getEnclosingClass();
             String name;
             if (enclosingClass != null)

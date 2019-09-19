@@ -6,13 +6,17 @@ import handlers.BaseHandler;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
+import org.telegram.telegrambots.meta.generics.BotSession;
 
 public class TelegramHandler extends BaseHandler
 {
     private Bot bot;
     private TelegramBot tBotHandler;
+    private BotSession session;
 
-    public TelegramHandler(Bot bot){
+    public TelegramHandler(Bot bot)
+    {
+        ApiContextInitializer.init();
         this.bot = bot;
     }
 
@@ -25,20 +29,21 @@ public class TelegramHandler extends BaseHandler
     @Override
     public void handleMessage(Message message)
     {
+        if (message.text.equals("/start"))
+            message.text = "start";
         bot.handleMessage(message);
     }
 
     @Override
     public void start()
     {
-        ApiContextInitializer.init();
         TelegramBotsApi tBot = new TelegramBotsApi();
         try
         {
             tBotHandler = new TelegramBot(this);
-            tBot.registerBot(tBotHandler);
-        }
-        catch (TelegramApiException e){
+            session = tBot.registerBot(tBotHandler);
+        } catch (TelegramApiException e)
+        {
             e.printStackTrace();
         }
     }
@@ -46,6 +51,6 @@ public class TelegramHandler extends BaseHandler
     @Override
     public void stop()
     {
-        ApiContextInitializer.init();
+        session.stop();
     }
 }
