@@ -1,6 +1,6 @@
 package core;
 
-public class User<T extends Comparable>
+public class User<T>
 {
     public T id;
     public String state;
