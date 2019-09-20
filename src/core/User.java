@@ -22,10 +22,10 @@ public class User<T extends Comparable>
     @Override
     public boolean equals(Object obj)
     {
-        if (obj instanceof User<?>)
+        if (obj instanceof User)
         {
             var other = (User<?>) obj;
-            return other.id.compareTo(id) == 0 && other.userPlatform.equals(userPlatform);
+            return other.id.equals(id) && other.userPlatform.equals(userPlatform);
         }
         return false;
     }

@@ -55,6 +55,7 @@ public class Anonymous extends BaseGame
     public void start(User user)
     {
         if (!data.contains(user)) data.add(user);
+
         sendMessage(new Message("Hello, you start anonymous. say searchpair to find chatmate", user));
         user.state = "anonymous";
     }
