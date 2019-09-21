@@ -77,4 +77,6 @@ public class QuizTest
         tester.handleMessage(message);
         Assert.assertEquals(3, tester.queue.size());
     }
+
+    //TODO: RightAnswerCheck
 }
