@@ -1,14 +1,10 @@
 package data.botCommands;
 
-import core.BasicSet;
 import core.CommandBase;
-import data.botCommands.ExitCommand;
-import data.botCommands.ListCommand;
-import data.botCommands.QuizCommand;
 
 import java.util.HashMap;
 
-public class BotCommandSet extends BasicSet<CommandBase, HashMap<String,CommandBase>>
+public class BotCommandSet extends core.BasicSet<CommandBase, HashMap<String,CommandBase>>
 {
     public BotCommandSet()
     {

@@ -1,9 +1,6 @@
 package data.botCommands;
 
-import core.CommandBase;
-import core.Message;
-import core.MessageHandlable;
-import core.User;
+import core.*;
 
 public class ListCommand extends CommandBase
 {
@@ -21,14 +18,14 @@ public class ListCommand extends CommandBase
         StringBuilder result = new StringBuilder();
         for (var command : commands.getAll())
         {
-            if(!command.hasIncludingPlatform(user.userPlatform))
+            if (!command.hasIncludingPlatform(user.userPlatform))
                 continue;
             Class<?> enclosingClass = command.getClass().getEnclosingClass();
             String name;
             if (enclosingClass != null)
                 name = enclosingClass.getSimpleName().toLowerCase();
             else name = command.getClass().getSimpleName().toLowerCase();
-            name = name.substring(0, name.length() - 7);
+            name = commands.getCommandPrefix() + name.substring(commands.getPrefixCount(), name.length() - commands.getSuffixCount());
 
             result.append(String.format("%s\t-\t %s\n", name, command.info));
         }

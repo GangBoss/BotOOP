@@ -6,8 +6,23 @@ import java.util.Map;
 public abstract class BasicSet<T, V extends Map<String, T>>
 {
     protected V set;
-    protected int prefixCount;
-    protected int suffixCount;
+    protected int prefixCount = 0;
+    protected int suffixCount = 0;
+    protected String commandPrefix = "";
+
+    public int getPrefixCount()
+    {
+        return prefixCount;
+    }
+
+    public int getSuffixCount()
+    {
+        return suffixCount;
+    }
+
+    public String getCommandPrefix(){
+        return commandPrefix;
+    }
 
     protected void add(T item)
     {
