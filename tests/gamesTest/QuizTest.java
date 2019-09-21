@@ -68,4 +68,13 @@ public class QuizTest
         tester.handleMessage(message);
         Assert.assertEquals(5, tester.queue.size());
     }
+
+    @Test
+    public void NotCommandQuizTest()
+    {
+        quiz.start(user1);
+        Message message = new Message("test", user1);
+        tester.handleMessage(message);
+        Assert.assertEquals(3, tester.queue.size());
+    }
 }
