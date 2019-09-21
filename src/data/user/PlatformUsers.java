@@ -6,17 +6,12 @@ import java.util.HashMap;
 
 class PlatformUsers<T> extends HashMap
 {
-    private String userPlatform;
+    public final String userPlatform;
     private HashMap<T, User<T>> users = new HashMap<>();
 
     PlatformUsers(String platform)
     {
         userPlatform = platform;
-    }
-
-    public String getUserPlatform()
-    {
-        return userPlatform;
     }
 
     void addUser(User<T> user)
