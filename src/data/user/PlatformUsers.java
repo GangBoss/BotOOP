@@ -4,12 +4,12 @@ import core.User;
 
 import java.util.HashMap;
 
-public class PlatformUsers<T> extends HashMap
+class PlatformUsers<T> extends HashMap
 {
     private String userPlatform;
     private HashMap<T, User<T>> users = new HashMap<>();
 
-    public PlatformUsers(String platform)
+    PlatformUsers(String platform)
     {
         userPlatform = platform;
     }
@@ -19,22 +19,24 @@ public class PlatformUsers<T> extends HashMap
         return userPlatform;
     }
 
-    public void addUser(User<T> user)
+    void addUser(User<T> user)
     {
+        if (users.containsKey(user.id))
+            return;
         users.put(user.id, user);
     }
 
-    public void removeUser(T userId)
+    void removeUser(T userId)
     {
         users.remove(userId);
     }
 
-    public boolean hasUser(User user) throws IllegalArgumentException
+    boolean hasUser(User user) throws IllegalArgumentException
     {
         return users.containsKey(user.id);
     }
 
-    public User getUser(User user)
+    User getUser(User user)
     {
         return users.get(user.id);
     }
