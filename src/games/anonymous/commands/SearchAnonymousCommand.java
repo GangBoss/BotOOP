@@ -5,10 +5,10 @@ import core.MessageHandlable;
 import core.User;
 import games.anonymous.Anonymous;
 
-public class SearchPairAnonymousCommand extends CommandBase
+public class SearchAnonymousCommand extends CommandBase
 {
 
-    public SearchPairAnonymousCommand()
+    public SearchAnonymousCommand()
     {
         super("Find pair");
     }

@@ -14,7 +14,7 @@ public class AnonymousCommandSet extends BasicSet<CommandBase, HashMap<String, C
         prefixCount=0;
 
         add(new ExitAnonymousCommand());
-        add(new SearchPairAnonymousCommand());
+        add(new SearchAnonymousCommand());
         add(new AbandonChatAnonymousCommand());
     }
 }

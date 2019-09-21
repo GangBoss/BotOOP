@@ -33,8 +33,8 @@ public class Anonymous extends BaseGame
             var user2 = pairs.get(user);
             pairs.remove(user2);
             pairs.remove(user);
-            sendMessage(new Message("Your chatmate abbadone", user2));
-            sendMessage(new Message("You abbadone chat", user));
+            sendMessage(new Message("Your chatmate abbadon chat", user2));
+            sendMessage(new Message("You abbadon chat", user));
         }
     }
 
@@ -56,7 +56,7 @@ public class Anonymous extends BaseGame
     {
         if (!data.contains(user)) data.add(user);
 
-        sendMessage(new Message("Hello, you start anonymous. say searchpair to find chatmate", user));
+        sendMessage(new Message("Hello, you start anonymous. say search to find chatmate", user));
         user.state = "anonymous";
     }
 
