@@ -4,7 +4,7 @@ import core.User;
 
 import java.util.HashMap;
 
-public class PlatformUsers<T extends Comparable> extends HashMap
+public class PlatformUsers<T> extends HashMap
 {
     private String userPlatform;
     private HashMap<T, User<T>> users = new HashMap<>();
