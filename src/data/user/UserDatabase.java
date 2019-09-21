@@ -10,7 +10,7 @@ public class UserDatabase
 
     public boolean hasUser(User user)
     {
-        if(!platforms.containsKey(user.userPlatform)) return false;
+        if (!platforms.containsKey(user.userPlatform)) return false;
         return platforms.get(user.userPlatform).hasUser(user);
     }
 
@@ -28,6 +28,8 @@ public class UserDatabase
 
     public User getUser(User user)
     {
-        return platforms.get(user.userPlatform).getUser(user);
+        if (platforms.containsKey(user.userPlatform))
+            return platforms.get(user.userPlatform).getUser(user);
+        return null;
     }
 }

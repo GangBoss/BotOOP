@@ -33,6 +33,8 @@ class PlatformUsers<T> extends HashMap
 
     User getUser(User user)
     {
-        return users.get(user.id);
+        if (hasUser(user))
+            return users.get(user.id);
+        return null;
     }
 }
