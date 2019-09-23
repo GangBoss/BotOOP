@@ -2,6 +2,7 @@ package games.anonymous;
 
 import core.Bot;
 import core.Message;
+import core.MessageHandlable;
 import core.User;
 import games.BaseGame;
 import games.anonymous.commands.AnonymousCommandSet;
@@ -12,11 +13,11 @@ public class Anonymous extends BaseGame
 {
     private ArrayList<User> users = new ArrayList<User>();
     private AnonymousCommandSet commands = new AnonymousCommandSet();
-    private Bot bot;
+    private MessageHandlable bot;
     public Searcher searcher;
 
 
-    public Anonymous(Bot bot)
+    public Anonymous(MessageHandlable bot)
     {
         this.bot = bot;
         this.searcher = new Searcher(bot);
