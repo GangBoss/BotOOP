@@ -36,7 +36,7 @@ public class ConsoleHandler extends BaseHandler
         var name = console.nextLine();
 
         var user = new User<>(name, "console");
-        handleMessage(new Message("start", user));
+        handleMessage(new Message("/start", user));
         while (!getIsStopped())
         {
             var input = console.nextLine();
