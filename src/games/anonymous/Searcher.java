@@ -49,8 +49,8 @@ public class Searcher
             var user2 = pairs.get(user);
             pairs.remove(user2);
             pairs.remove(user);
-            bot.sendMessage(new Message("Your chatmate abbadon chat", user2));
-            bot.sendMessage(new Message("You abbadon chat", user));
+            bot.sendMessage(new Message("Your chatmate abandon chat", user2));
+            bot.sendMessage(new Message("You abandon chat", user));
         }
        else if(searchers.contains(user))
         {            bot.sendMessage(new Message("You are not searching anymore", user));
