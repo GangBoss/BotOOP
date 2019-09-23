@@ -28,7 +28,7 @@ public class Quiz extends BaseGame
     public void start(User user)
     {
         if (!data.containsKey(user)) data.put(user, new QuizData());
-        sendMessage(new Message("Hello, you start quiz game. If you want exit from quiz type exitQuiz", user));
+        sendMessage(new Message("Hello, you start quiz game. If you want exit from quiz type /exit", user));
         user.state = "quiz";
         var uData = data.get(user);
         uData.currentQuestionId = getRandomQuestionId();

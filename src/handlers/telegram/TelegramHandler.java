@@ -29,8 +29,6 @@ public class TelegramHandler extends BaseHandler
     @Override
     public void handleMessage(Message message)
     {
-        if (message.text.equals("/start"))
-            message.text = "start";
         bot.handleMessage(message);
     }
 

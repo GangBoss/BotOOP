@@ -20,7 +20,8 @@ public abstract class BasicSet<T, V extends Map<String, T>>
         return suffixCount;
     }
 
-    public String getCommandPrefix(){
+    public String getCommandPrefix()
+    {
         return commandPrefix;
     }
 
@@ -31,7 +32,7 @@ public abstract class BasicSet<T, V extends Map<String, T>>
         if (enclosingClass != null)
             name = enclosingClass.getSimpleName().toLowerCase();
         else name = item.getClass().getSimpleName().toLowerCase();
-        name = name.substring(prefixCount, name.length() - suffixCount);
+        name = commandPrefix + name.substring(prefixCount, name.length() - suffixCount);
         set.put(name, item);
     }
 
