@@ -27,7 +27,7 @@ public class Anonymous extends BaseGame
     {
         if (!users.contains(user)) users.add(user);
         searcher.addUser(user);
-        sendMessage(new Message("Hello, you start anonymous. say search to find chatmate users in db:" + users.size(), user));
+        sendMessage(new Message("Hello, you start anonymous. say /search to find chatmate users in db:" + users.size(), user));
         user.state = "anonymous";
     }
 
