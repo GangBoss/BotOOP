@@ -12,6 +12,7 @@ public class AnonymousCommandSet extends BasicSet<CommandBase, HashMap<String, C
         set = new HashMap<>();
         suffixCount = "AnonymousCommand".length();
         prefixCount=0;
+        commandPrefix = "/";
 
         add(new ExitAnonymousCommand());
         add(new SearchAnonymousCommand());
