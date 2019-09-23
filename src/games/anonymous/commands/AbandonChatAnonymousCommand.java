@@ -15,6 +15,6 @@ public class AbandonChatAnonymousCommand extends CommandBase
     @Override
     public void execute(MessageHandlable anonymous, User user)
     {
-        ((Anonymous) anonymous).abandonChat(user);
+        ((Anonymous) anonymous).searcher.abandonChat(user);
     }
 }

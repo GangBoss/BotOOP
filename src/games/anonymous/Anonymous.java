@@ -5,69 +5,39 @@ import core.Message;
 import core.User;
 import games.BaseGame;
 import games.anonymous.commands.AnonymousCommandSet;
+
 import java.util.ArrayList;
-import java.util.HashMap;
 
 public class Anonymous extends BaseGame
 {
-    private ArrayList<User> data = new ArrayList<User>();
-    private ArrayList<User> searchers = new ArrayList<User>();
-    private HashMap<User, User> pairs = new HashMap<User, User>();
+    private ArrayList<User> users = new ArrayList<User>();
     private AnonymousCommandSet commands = new AnonymousCommandSet();
     private Bot bot;
+    public Searcher searcher;
 
-    void addPair(User first, User second)
-    {
-        searchers.remove(first);
-        searchers.remove(second);
-        sendMessage(new Message("You find pair in a chat", first));
-        sendMessage(new Message("You find pair in a chat", second));
-        pairs.put(first, second);
-        pairs.put(second, first);
-    }
-
-    public void abandonChat(User user)
-    {
-        if (pairs.containsKey(user))
-        {
-            var user2 = pairs.get(user);
-            pairs.remove(user2);
-            pairs.remove(user);
-            sendMessage(new Message("Your chatmate abbadon chat", user2));
-            sendMessage(new Message("You abbadon chat", user));
-        }
-    }
-
-    public void search(User user)
-    {
-        searchers.add(user);
-        sendMessage(new Message("You are searching a pair", user));
-        if (searchers.size() >= 2)
-            addPair(searchers.get(0), searchers.get(1));
-    }
 
     public Anonymous(Bot bot)
     {
         this.bot = bot;
+        this.searcher = new Searcher(bot);
     }
 
     @Override
     public void start(User user)
     {
-        if (!data.contains(user)) data.add(user);
-
-        sendMessage(new Message("Hello, you start anonymous. say search to find chatmate", user));
+        if (!users.contains(user)) users.add(user);
+        searcher.addUser(user);
+        sendMessage(new Message("Hello, you start anonymous. say search to find chatmate users in db:" + users.size(), user));
         user.state = "anonymous";
     }
 
     @Override
     public void stop(User user)
     {
-        user.state = "";
         sendMessage(new Message("You are living anonymous chat", user));
-        data.remove(user);
-        if (searchers.contains(user)) searchers.remove(user);
-        abandonChat(user);
+        //  if (searchers.contains(user)) searchers.remove(user);
+        searcher.stop(user);
+        user.state = "";
     }
 
     @Override
@@ -79,11 +49,9 @@ public class Anonymous extends BaseGame
     @Override
     public void handleMessage(Message message)
     {
+        var user = message.user;
         if (commands.hasCommand(message.text))
-            commands.find(message.text).execute(this, message.user);
-        else if (pairs.containsKey(message.user))
-            sendMessage(new Message(message.text, pairs.get(message.user)));
-        else
-            sendMessage(new Message("It is not a command and u are not in anonymous chat yet", message.user));
+            commands.find(message.text).execute(this, user);
+        else searcher.handleMessage(message);
     }
 }
