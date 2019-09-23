@@ -39,6 +39,17 @@ public class AnonymousTest
     }
 
     @Test
+    public void SearchersAnonymousTest()
+    {
+        anonymous.start(user1);
+        anonymous.start(user2);
+        tester.handleMessage( new Message("/search", user1));
+        tester.handleMessage( new Message("/searchers", user1));
+        tester.handleMessage( new Message("/search", user2));
+        Assert.assertEquals(7, tester.queue.size());
+    }
+
+    @Test
     public void StartOneUserAnonymousTest()
     {
         anonymous.start(user1);

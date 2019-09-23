@@ -2,11 +2,13 @@ package data.botCommands;
 
 import core.*;
 
-public class ListCommand extends CommandBase
-{
-    private BotCommandSet commands;
+import java.util.HashMap;
 
-    public ListCommand(BotCommandSet commands)
+public class ListCommand<T extends core.BasicSet<CommandBase, HashMap<String,CommandBase>>> extends CommandBase
+{
+    private T commands;
+
+    public ListCommand(T commands)
     {
         super("Print all commands");
         this.commands = commands;

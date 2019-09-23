@@ -30,6 +30,12 @@ public class Searcher
         abandonChat(user);
     }
 
+    public void searching(User user)
+    {
+        bot.sendMessage(new Message("Now searching:"+searchers.size(), user));
+    }
+
+
     private void addPair(User first, User second)
     {
         searchers.remove(first);

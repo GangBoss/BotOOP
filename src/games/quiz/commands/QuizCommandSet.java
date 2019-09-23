@@ -15,5 +15,6 @@ public class QuizCommandSet extends BasicSet<CommandBase, HashMap<String, Comman
 
         add(new ExitQuizCommand());
         add(new NextQuizCommand());
+        add (new ListQuizCommand(this));
     }
 }

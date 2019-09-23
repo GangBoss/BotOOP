@@ -5,7 +5,8 @@ import core.CommandBase;
 import core.MessageHandleable;
 import core.User;
 
-public class AnonymousCommand extends CommandBase
+public class
+AnonymousCommand extends CommandBase
 {
     public AnonymousCommand()
     {
