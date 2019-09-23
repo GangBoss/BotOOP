@@ -13,6 +13,6 @@ public class StartCommand extends CommandBase
     public void execute(MessageHandlable bot, User user)
     {
         bot.sendMessage(new Message("Hello, I'm a bot.", user));
-        bot.sendMessage(new Message("Enter \"list\" to view all commands.", user));
+        bot.sendMessage(new Message("Enter \"/list\" to view all commands.", user));
     }
 }

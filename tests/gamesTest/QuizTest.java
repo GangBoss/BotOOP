@@ -55,7 +55,7 @@ public class QuizTest
     public void ExitQuizTest()
     {
         quiz.start(user1);
-        Message message = new Message("exit", user1);
+        Message message = new Message("/exit", user1);
         tester.handleMessage(message);
         Assert.assertEquals("", user1.state);
     }
@@ -64,7 +64,7 @@ public class QuizTest
     public void NextQuizTest()
     {
         quiz.start(user1);
-        Message message = new Message("next", user1);
+        Message message = new Message("/next", user1);
         tester.handleMessage(message);
         Assert.assertEquals(5, tester.queue.size());
     }

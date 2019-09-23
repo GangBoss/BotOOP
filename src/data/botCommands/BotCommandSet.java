@@ -11,6 +11,7 @@ public class BotCommandSet extends core.BasicSet<CommandBase, HashMap<String,Com
         set = new HashMap<>();
         prefixCount = 0;
         suffixCount = 7;
+        commandPrefix = "/";
 
         add(new ListCommand(this));
         add(new QuizCommand());
