@@ -1,7 +1,7 @@
 package games.anonymous.commands;
 
 import core.CommandBase;
-import core.MessageHandlable;
+import core.MessageHandleable;
 import core.User;
 import games.anonymous.Anonymous;
 
@@ -13,7 +13,7 @@ public class ExitAnonymousCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandlable anonymous, User user)
+    public void execute(MessageHandleable anonymous, User user)
     {
         ((Anonymous) anonymous).stop(user);
     }

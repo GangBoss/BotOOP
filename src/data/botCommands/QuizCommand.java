@@ -2,7 +2,7 @@ package data.botCommands;
 
 import core.Bot;
 import core.CommandBase;
-import core.MessageHandlable;
+import core.MessageHandleable;
 import core.User;
 
 public class QuizCommand extends CommandBase
@@ -13,7 +13,7 @@ public class QuizCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandlable bot, User user)
+    public void execute(MessageHandleable bot, User user)
     {
         ((Bot)bot).games.find("quiz").start(user);
     }

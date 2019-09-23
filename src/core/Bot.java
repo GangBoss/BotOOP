@@ -7,7 +7,7 @@ import handlers.HandlerSet;
 
 import java.util.ArrayDeque;
 
-public class Bot extends Runner implements MessageHandlable
+public class Bot extends Runner implements MessageHandleable
 {
     private BotCommandSet commands = new BotCommandSet();
     private UserDatabase database = new UserDatabase();

@@ -1,7 +1,7 @@
 package games.quiz.commands;
 
 import core.CommandBase;
-import core.MessageHandlable;
+import core.MessageHandleable;
 import core.User;
 import games.quiz.Quiz;
 
@@ -14,7 +14,7 @@ public class NextQuizCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandlable bot, User user)
+    public void execute(MessageHandleable bot, User user)
     {
         ((Quiz)bot).next(user);
     }

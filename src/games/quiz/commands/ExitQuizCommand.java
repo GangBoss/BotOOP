@@ -1,7 +1,7 @@
 package games.quiz.commands;
 
 import core.CommandBase;
-import core.MessageHandlable;
+import core.MessageHandleable;
 import core.User;
 import games.quiz.Quiz;
 
@@ -13,7 +13,7 @@ public class ExitQuizCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandlable quiz, User user)
+    public void execute(MessageHandleable quiz, User user)
     {
         ((Quiz) quiz).stop(user);
     }

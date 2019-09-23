@@ -1,6 +1,6 @@
 package core;
 
-public interface MessageHandlable
+public interface MessageHandleable
 {
     void sendMessage(Message message);
 

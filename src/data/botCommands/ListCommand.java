@@ -13,7 +13,7 @@ public class ListCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandlable handler, User user)
+    public void execute(MessageHandleable handler, User user)
     {
         StringBuilder result = new StringBuilder();
         for (var command : commands.getAll())

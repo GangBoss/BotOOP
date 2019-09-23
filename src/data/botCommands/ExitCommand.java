@@ -12,7 +12,7 @@ public class ExitCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandlable bot, User user)
+    public void execute(MessageHandleable bot, User user)
     {
         if (!hasIncludingPlatform(user.userPlatform))
             bot.sendMessage(new Message("Invalid command", user));

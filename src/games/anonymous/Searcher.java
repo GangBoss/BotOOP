@@ -1,8 +1,7 @@
 package games.anonymous;
 
-import core.Bot;
 import core.Message;
-import core.MessageHandlable;
+import core.MessageHandleable;
 import core.User;
 
 import java.util.ArrayList;
@@ -13,9 +12,9 @@ public class Searcher
     private ArrayList<User> data = new ArrayList<User>();
     private ArrayList<User> searchers = new ArrayList<User>();
     private HashMap<User, User> pairs = new HashMap<User, User>();
-    private MessageHandlable bot;
+    private MessageHandleable bot;
 
-    public Searcher(MessageHandlable bot)
+    public Searcher(MessageHandleable bot)
     {
         this.bot = bot;
     }

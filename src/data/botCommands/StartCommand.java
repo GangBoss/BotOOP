@@ -10,7 +10,7 @@ public class StartCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandlable bot, User user)
+    public void execute(MessageHandleable bot, User user)
     {
         bot.sendMessage(new Message("Hello, I'm a bot.", user));
         bot.sendMessage(new Message("Enter \"/list\" to view all commands.", user));
