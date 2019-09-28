@@ -18,7 +18,7 @@ public class UserDatabase
     public void addUser(User user)
     {
         if (!platforms.containsKey(user.userPlatform))
-            platforms.put(user.userPlatform, new PlatformUsers<>(user.userPlatform));
+            platforms.put(user.userPlatform, new PlatformUsers<>());
         platforms.get(user.userPlatform).addUser(user);
     }
 

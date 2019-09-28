@@ -7,13 +7,7 @@ import java.util.HashMap;
 
 class PlatformUsers<T> extends HashMap
 {
-    public final PlatformType userPlatform;
     private HashMap<T, User<T>> users = new HashMap<>();
-
-    PlatformUsers(PlatformType platform)
-    {
-        userPlatform = platform;
-    }
 
     void addUser(User<T> user)
     {
