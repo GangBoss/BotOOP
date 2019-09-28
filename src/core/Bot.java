@@ -14,11 +14,9 @@ public class Bot extends Runner implements MessageHandler
     private ArrayDeque<Message> messageQueue = new ArrayDeque<>();
     private HandlerSet handlers;
     public final GameSet games;
-    private boolean withUser;
 
     public Bot(boolean withUser) throws Exception
     {
-        this.withUser = withUser;
         handlers = new HandlerSet(this, withUser);
         games = new GameSet(this);
     }
