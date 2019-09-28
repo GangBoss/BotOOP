@@ -16,6 +16,6 @@ public class SearchingAnonymousCommand extends CommandBase
     @Override
     public void execute(MessageHandler bot, User user)
     {
-        ((Anonymous)bot).searcher.searching(user);
+        ((Anonymous) bot).searcher.searching(user);
     }
 }

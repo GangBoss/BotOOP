@@ -1,10 +1,12 @@
 package data.botCommands;
 
-import core.*;
+import core.CommandBase;
+import core.Message;
+import core.MessageHandler;
+import core.User;
+import core.set.StringSet;
 
-import java.util.HashMap;
-
-public class ListCommand<T extends core.BasicSet<CommandBase, HashMap<String,CommandBase>>> extends CommandBase
+public class ListCommand<T extends StringSet<CommandBase>> extends CommandBase
 {
     private T commands;
 

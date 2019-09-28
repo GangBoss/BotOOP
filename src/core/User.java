@@ -4,9 +4,9 @@ public class User<T>
 {
     public T id;
     public String state;
-    public String userPlatform;
+    public PlatformType userPlatform;
 
-    public User(T id, String userPlatform)
+    public User(T id, PlatformType userPlatform)
     {
         this.id = id;
         this.userPlatform = userPlatform;
@@ -15,7 +15,7 @@ public class User<T>
     @Override
     public int hashCode()
     {
-        String builder = id.toString() + userPlatform.toLowerCase();
+        String builder = id.toString() + userPlatform.name().toLowerCase();
         return builder.hashCode();
     }
 

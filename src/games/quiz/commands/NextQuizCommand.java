@@ -16,6 +16,6 @@ public class NextQuizCommand extends CommandBase
     @Override
     public void execute(MessageHandler bot, User user)
     {
-        ((Quiz)bot).next(user);
+        ((Quiz) bot).next(user);
     }
 }

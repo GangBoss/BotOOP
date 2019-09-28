@@ -1,11 +1,7 @@
-package core;
+package core.set;
 
-import java.util.Collection;
-import java.util.Map;
-
-public abstract class BasicSet<T, V extends Map<String, T>>
+public class StringSet<T> extends BasicSet<String, T>
 {
-    protected V set;
     protected int prefixCount = 0;
     protected int suffixCount = 0;
     protected String commandPrefix = "";
@@ -25,6 +21,7 @@ public abstract class BasicSet<T, V extends Map<String, T>>
         return commandPrefix;
     }
 
+    @Override
     protected void add(T item)
     {
         Class<?> enclosingClass = item.getClass().getEnclosingClass();
@@ -34,20 +31,5 @@ public abstract class BasicSet<T, V extends Map<String, T>>
         else name = item.getClass().getSimpleName().toLowerCase();
         name = commandPrefix + name.substring(prefixCount, name.length() - suffixCount);
         set.put(name, item);
-    }
-
-    public T find(String name)
-    {
-        return set.getOrDefault(name, null);
-    }
-
-    public boolean hasCommand(String name)
-    {
-        return set.containsKey(name);
-    }
-
-    public Collection<T> getAll()
-    {
-        return set.values();
     }
 }

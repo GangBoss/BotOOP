@@ -1,8 +1,8 @@
 package core;
 
 import data.botCommands.BotCommandSet;
-import games.GameSet;
 import data.user.UserDatabase;
+import games.GameSet;
 import handlers.HandlerSet;
 
 import java.util.ArrayDeque;

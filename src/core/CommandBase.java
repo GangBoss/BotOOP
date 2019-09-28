@@ -1,8 +1,6 @@
 package core;
 
 
-import core.Command;
-
 import java.util.ArrayList;
 
 public abstract class CommandBase implements Command
@@ -10,7 +8,7 @@ public abstract class CommandBase implements Command
     public String info;
     protected ArrayList<String> includingPlatforms = new ArrayList<String>();
 
-    public boolean hasIncludingPlatform(String platform)
+    public boolean hasIncludingPlatform(PlatformType platform)
     {
         return includingPlatforms.size() == 0 || includingPlatforms.contains(platform);
     }

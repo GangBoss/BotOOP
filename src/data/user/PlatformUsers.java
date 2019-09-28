@@ -1,15 +1,16 @@
 package data.user;
 
+import core.PlatformType;
 import core.User;
 
 import java.util.HashMap;
 
 class PlatformUsers<T> extends HashMap
 {
-    public final String userPlatform;
+    public final PlatformType userPlatform;
     private HashMap<T, User<T>> users = new HashMap<>();
 
-    PlatformUsers(String platform)
+    PlatformUsers(PlatformType platform)
     {
         userPlatform = platform;
     }

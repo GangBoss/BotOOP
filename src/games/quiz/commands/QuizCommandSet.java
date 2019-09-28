@@ -1,11 +1,11 @@
 package games.quiz.commands;
 
-import core.BasicSet;
 import core.CommandBase;
+import core.set.StringSet;
 
 import java.util.HashMap;
 
-public class QuizCommandSet extends BasicSet<CommandBase, HashMap<String, CommandBase>>
+public class QuizCommandSet extends StringSet<CommandBase>
 {
     public QuizCommandSet()
     {
@@ -15,6 +15,6 @@ public class QuizCommandSet extends BasicSet<CommandBase, HashMap<String, Comman
 
         add(new ExitQuizCommand());
         add(new NextQuizCommand());
-        add (new ListQuizCommand(this));
+        add(new ListQuizCommand(this));
     }
 }

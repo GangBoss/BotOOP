@@ -15,6 +15,6 @@ public class QuizCommand extends CommandBase
     @Override
     public void execute(MessageHandler bot, User user)
     {
-        ((Bot)bot).games.find("quiz").start(user);
+        ((Bot) bot).games.find("quiz").start(user);
     }
 }

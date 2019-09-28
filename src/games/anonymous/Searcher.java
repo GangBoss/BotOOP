@@ -24,7 +24,7 @@ public class Searcher
         data.add(user);
     }
 
-   public void stop(User user)
+    public void stop(User user)
     {
         searchers.remove(user);
         abandonChat(user);
@@ -32,7 +32,7 @@ public class Searcher
 
     public void searching(User user)
     {
-        bot.sendMessage(new Message("Now searching:"+searchers.size(), user));
+        bot.sendMessage(new Message("Now searching:" + searchers.size(), user));
     }
 
 
@@ -56,9 +56,9 @@ public class Searcher
             pairs.remove(user);
             bot.sendMessage(new Message("Your chatmate abandon chat", user2));
             bot.sendMessage(new Message("You abandon chat", user));
-        }
-       else if(searchers.contains(user))
-        {            bot.sendMessage(new Message("You are not searching anymore", user));
+        } else if (searchers.contains(user))
+        {
+            bot.sendMessage(new Message("You are not searching anymore", user));
             searchers.remove(user);
         }
     }

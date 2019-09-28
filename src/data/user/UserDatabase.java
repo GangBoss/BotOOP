@@ -1,12 +1,13 @@
 package data.user;
 
+import core.PlatformType;
 import core.User;
 
 import java.util.HashMap;
 
 public class UserDatabase
 {
-    private HashMap<String, PlatformUsers> platforms = new HashMap<>();
+    private HashMap<PlatformType, PlatformUsers> platforms = new HashMap<>();
 
     public boolean hasUser(User user)
     {

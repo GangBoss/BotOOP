@@ -1,13 +1,13 @@
 package games;
 
-import core.BasicSet;
 import core.Bot;
+import core.set.StringSet;
 import games.anonymous.Anonymous;
 import games.quiz.Quiz;
 
 import java.util.HashMap;
 
-public class GameSet extends BasicSet<BaseGame, HashMap<String, BaseGame>>
+public class GameSet extends StringSet<BaseGame>
 {
     public GameSet(Bot bot) throws Exception
     {

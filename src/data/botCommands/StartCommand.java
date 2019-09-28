@@ -1,6 +1,9 @@
 package data.botCommands;
 
-import core.*;
+import core.CommandBase;
+import core.Message;
+import core.MessageHandler;
+import core.User;
 
 public class StartCommand extends CommandBase
 {

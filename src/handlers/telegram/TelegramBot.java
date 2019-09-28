@@ -1,9 +1,8 @@
 package handlers.telegram;
 
-import core.Bot;
+import core.PlatformType;
 import core.User;
 import handlers.BaseHandler;
-import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
@@ -25,7 +24,7 @@ public class TelegramBot extends TelegramLongPollingBot
         Message message = update.getMessage();
         if (message != null && message.hasText() && message.isUserMessage())
         {
-            var user = new User<>(message.getChatId(), "telegram");
+            var user = new User<>(message.getChatId(), PlatformType.Telegram);
             handler.handleMessage(new core.Message(message.getText(), user));
         }
     }

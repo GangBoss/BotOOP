@@ -1,6 +1,7 @@
 package gamesTest;
 
 import core.Message;
+import core.PlatformType;
 import core.User;
 import games.quiz.Quiz;
 import org.junit.Assert;
@@ -18,8 +19,8 @@ public class QuizTest
     @Before
     public void setUp() throws Exception
     {
-        user1 = new User<>("user1", "console");
-        user2 = new User<>("user2", "console");
+        user1 = new User<>("user1", PlatformType.Console);
+        user2 = new User<>("user2", PlatformType.Console);
         tester = new TestMessageHandler();
         quiz = new Quiz(tester);
         tester.setTestedHandler(quiz);

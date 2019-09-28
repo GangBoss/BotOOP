@@ -1,19 +1,17 @@
 package handlers;
 
-import core.BasicSet;
 import core.Bot;
+import core.PlatformType;
+import core.set.BasicSet;
 import handlers.telegram.TelegramHandler;
 
-import java.util.Collection;
 import java.util.LinkedHashMap;
 
-public class HandlerSet extends BasicSet<BaseHandler, LinkedHashMap<String, BaseHandler>>
+public class HandlerSet extends BasicSet<PlatformType, BaseHandler>
 {
     public HandlerSet(Bot bot, boolean withUser)
     {
         set = new LinkedHashMap<>();
-        prefixCount = 0;
-        suffixCount = 7;
         add(new TelegramHandler(bot));
         //Should be last always
         if (withUser) add(new ConsoleHandler(bot));
@@ -30,5 +28,11 @@ public class HandlerSet extends BasicSet<BaseHandler, LinkedHashMap<String, Base
     {
         for (var handler : set.values())
             handler.stop();
+    }
+
+    @Override
+    protected void add(BaseHandler item)
+    {
+        set.put(item.getType(), item);
     }
 }

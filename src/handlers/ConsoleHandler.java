@@ -2,6 +2,7 @@ package handlers;
 
 import core.Bot;
 import core.Message;
+import core.PlatformType;
 import core.User;
 
 import java.util.Scanner;
@@ -13,6 +14,7 @@ public class ConsoleHandler extends BaseHandler
     ConsoleHandler(Bot bot)
     {
         this.bot = bot;
+        type = PlatformType.Console;
     }
 
     @Override
@@ -35,7 +37,7 @@ public class ConsoleHandler extends BaseHandler
         System.out.println("Enter your name:");
         var name = console.nextLine();
 
-        var user = new User<>(name, "console");
+        var user = new User<>(name, type);
         handleMessage(new Message("/start", user));
         while (!getIsStopped())
         {

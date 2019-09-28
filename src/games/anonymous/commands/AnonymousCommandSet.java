@@ -1,18 +1,17 @@
 package games.anonymous.commands;
 
-import core.BasicSet;
 import core.CommandBase;
-import data.botCommands.ListCommand;
+import core.set.StringSet;
 
 import java.util.HashMap;
 
-public class AnonymousCommandSet extends BasicSet<CommandBase, HashMap<String, CommandBase>>
+public class AnonymousCommandSet extends StringSet<CommandBase>
 {
     public AnonymousCommandSet()
     {
         set = new HashMap<>();
         suffixCount = "AnonymousCommand".length();
-        prefixCount=0;
+        prefixCount = 0;
         commandPrefix = "/";
 
         add(new ListAnonymousCommand(this));

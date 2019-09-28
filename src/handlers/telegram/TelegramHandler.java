@@ -2,6 +2,7 @@ package handlers.telegram;
 
 import core.Bot;
 import core.Message;
+import core.PlatformType;
 import handlers.BaseHandler;
 import org.telegram.telegrambots.ApiContextInitializer;
 import org.telegram.telegrambots.meta.TelegramBotsApi;
@@ -18,6 +19,7 @@ public class TelegramHandler extends BaseHandler
     {
         ApiContextInitializer.init();
         this.bot = bot;
+        type = PlatformType.Telegram;
     }
 
     @Override
