@@ -52,7 +52,7 @@ public class Quiz extends BaseGame
     {
         if (commands.hasCommand(message.text))
             commands.find(message.text).execute(this, message.user);
-        else if (questions.get(data.get(message.user).currentQuestionId).isRight(message.text))
+        else if (questions.get(data.get(message.user).currentQuestionId).isCorrect(message.text))
         {
             var quizData = data.get(message.user);
             quizData.rightAnswers++;

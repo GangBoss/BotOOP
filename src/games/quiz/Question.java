@@ -20,7 +20,7 @@ public class Question
         this.id = id;
     }
 
-    public boolean isRight(String userAnswer)
+    public boolean isCorrect(String userAnswer)
     {
         return Objects.equals(userAnswer.toLowerCase(), answer);
     }
