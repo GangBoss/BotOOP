@@ -21,7 +21,15 @@ public class HandlerSet extends BasicSet<PlatformType, BaseHandler>
     public void start()
     {
         for (var handler : set.values())
-            handler.start();
+        {
+            try
+            {
+                handler.start();
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
     }
 
     public void stop()

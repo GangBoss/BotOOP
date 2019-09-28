@@ -31,7 +31,7 @@ public class TelegramHandler extends BaseHandler
     @Override
     public void handleMessage(Message message)
     {
-        bot.handleMessage(message);
+        bot.addMessageToHandle(message);
     }
 
     @Override

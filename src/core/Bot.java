@@ -5,20 +5,22 @@ import data.user.UserDatabase;
 import games.GameSet;
 import handlers.HandlerSet;
 
-import java.util.ArrayDeque;
+import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Bot extends Runner implements MessageHandler
 {
     private BotCommandSet commands = new BotCommandSet();
     private UserDatabase database = new UserDatabase();
-    private ArrayDeque<Message> messageQueue = new ArrayDeque<>();
+    private ConcurrentLinkedDeque<Message> messageQueue = new ConcurrentLinkedDeque<>();
     private HandlerSet handlers;
     public final GameSet games;
+    private Thread handleThread;
 
     public Bot(boolean withUser) throws Exception
     {
         handlers = new HandlerSet(this, withUser);
         games = new GameSet(this);
+        handleThread = new Thread(() -> handleDeque());
     }
 
     public void start()
@@ -26,7 +28,20 @@ public class Bot extends Runner implements MessageHandler
         if (!isStopped)
             return;
         isStopped = false;
+        System.out.println("Starting...");
+        if(handleThread.isAlive())
+        {
+            try
+            {
+                handleThread.wait();
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
+        handleThread.start();
         handlers.start();
+        System.out.println("Started!");
     }
 
     public void stop()
@@ -36,6 +51,7 @@ public class Bot extends Runner implements MessageHandler
         isStopped = true;
         System.out.println("Stopping...");
         handlers.stop();
+        System.out.println("Stopped!");
     }
 
     @Override
@@ -44,9 +60,29 @@ public class Bot extends Runner implements MessageHandler
         handlers.find(message.user.userPlatform).sendMessage(message);
     }
 
-    public void AddMessageToHandle(Message message)
+    public synchronized void addMessageToHandle(Message message)
     {
+        messageQueue.add(message);
+        this.notify();
+    }
 
+    private synchronized void handleDeque()
+    {
+        while (!isStopped)
+        {
+            while (messageQueue.isEmpty())
+            {
+                try
+                {
+                    this.wait();
+                } catch (InterruptedException e)
+                {
+                    e.printStackTrace();
+                }
+            }
+            while (!messageQueue.isEmpty())
+                handleMessage(messageQueue.poll());
+        }
     }
 
     @Override
