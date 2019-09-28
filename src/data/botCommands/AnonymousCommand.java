@@ -2,7 +2,7 @@ package data.botCommands;
 
 import core.Bot;
 import core.CommandBase;
-import core.MessageHandleable;
+import core.MessageHandler;
 import core.User;
 
 public class
@@ -14,7 +14,7 @@ AnonymousCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandleable bot, User user)
+    public void execute(MessageHandler bot, User user)
     {
         ((Bot)bot).games.find("anonymous").start(user);
     }

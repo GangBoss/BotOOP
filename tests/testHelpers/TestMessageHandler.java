@@ -1,16 +1,16 @@
 package testHelpers;
 
 import core.Message;
-import core.MessageHandleable;
+import core.MessageHandler;
 
 import java.util.ArrayDeque;
 
-public class TestMessageHandler implements MessageHandleable
+public class TestMessageHandler implements MessageHandler
 {
-    private MessageHandleable handler;
+    private MessageHandler handler;
     public ArrayDeque<Message> queue = new ArrayDeque<>();
 
-    public void setTestedHandler(MessageHandleable testedHandler)
+    public void setTestedHandler(MessageHandler testedHandler)
     {
         handler = testedHandler;
     }

@@ -1,8 +1,8 @@
 package handlers;
 
-import core.MessageHandleable;
+import core.MessageHandler;
 import core.Runner;
 
-public abstract class BaseHandler extends Runner implements MessageHandleable
+public abstract class BaseHandler extends Runner implements MessageHandler
 {
 }

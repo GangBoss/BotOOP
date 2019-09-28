@@ -15,7 +15,7 @@ public class ListCommand<T extends core.BasicSet<CommandBase, HashMap<String,Com
     }
 
     @Override
-    public void execute(MessageHandleable handler, User user)
+    public void execute(MessageHandler handler, User user)
     {
         StringBuilder result = new StringBuilder();
         for (var command : commands.getAll())

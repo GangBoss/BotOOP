@@ -1,9 +1,9 @@
 package games;
 
-import core.MessageHandleable;
+import core.MessageHandler;
 import core.User;
 
-public abstract class BaseGame implements MessageHandleable
+public abstract class BaseGame implements MessageHandler
 {
     public abstract void start(User user);
 

@@ -14,6 +14,7 @@ public class GameSet extends BasicSet<BaseGame, HashMap<String, BaseGame>>
         set = new HashMap<>();
         prefixCount = 0;
         suffixCount = 0;
+
         add(new Quiz(bot));
         add(new Anonymous(bot));
     }

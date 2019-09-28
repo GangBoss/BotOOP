@@ -1,7 +1,7 @@
 package games.anonymous.commands;
 
 import core.CommandBase;
-import core.MessageHandleable;
+import core.MessageHandler;
 import core.User;
 import games.anonymous.Anonymous;
 
@@ -14,7 +14,7 @@ public class SearchAnonymousCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandleable bot, User user)
+    public void execute(MessageHandler bot, User user)
     {
         ((Anonymous)bot).searcher.search(user);
     }

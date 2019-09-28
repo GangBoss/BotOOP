@@ -1,7 +1,7 @@
 package games.quiz;
 
 import core.Message;
-import core.MessageHandleable;
+import core.MessageHandler;
 import core.User;
 import games.BaseGame;
 import games.quiz.commands.QuizCommandSet;
@@ -14,9 +14,9 @@ public class Quiz extends BaseGame
     private HashMap<User, QuizData> data = new HashMap<User, QuizData>();
     private HashMap<Integer, Question> questions = new HashMap<Integer, Question>();
     private QuizCommandSet commands = new QuizCommandSet();
-    private MessageHandleable bot;
+    private MessageHandler bot;
 
-    public Quiz(MessageHandleable bot) throws Exception
+    public Quiz(MessageHandler bot) throws Exception
     {
         var questions = Converter.getQuestions();
         for (var question : questions)
