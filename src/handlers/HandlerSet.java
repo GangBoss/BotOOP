@@ -22,13 +22,7 @@ public class HandlerSet extends BasicSet<PlatformType, BaseHandler>
     {
         for (var handler : set.values())
         {
-            try
-            {
-                handler.start();
-            } catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
+            handler.start();
         }
     }
 

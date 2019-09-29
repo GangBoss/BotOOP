@@ -4,6 +4,7 @@ import core.Bot;
 import core.CommandBase;
 import core.MessageHandler;
 import core.User;
+import games.GameType;
 
 public class QuizCommand extends CommandBase
 {
@@ -15,6 +16,6 @@ public class QuizCommand extends CommandBase
     @Override
     public void execute(MessageHandler bot, User user)
     {
-        ((Bot) bot).games.find("quiz").start(user);
+        ((Bot) bot).games.find(GameType.Quiz).start(user);
     }
 }

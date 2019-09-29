@@ -7,7 +7,6 @@ public abstract class BasicSet<V, T>
 {
     protected HashMap<V, T> set;
 
-
     protected abstract void add(T item);
 
     public T find(V name)

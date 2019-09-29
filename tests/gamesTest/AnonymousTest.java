@@ -3,6 +3,7 @@ package gamesTest;
 import core.Message;
 import core.PlatformType;
 import core.User;
+import games.GameType;
 import games.anonymous.Anonymous;
 import org.junit.Assert;
 import org.junit.Before;
@@ -55,7 +56,7 @@ public class AnonymousTest
     {
         anonymous.start(user1);
         Assert.assertEquals(1, tester.queue.size());
-        Assert.assertEquals("anonymous", user1.state);
+        Assert.assertEquals(GameType.Anonymous, user1.state);
     }
 
     @Test
@@ -64,8 +65,8 @@ public class AnonymousTest
         anonymous.start(user1);
         anonymous.start(user2);
         Assert.assertEquals(2, tester.queue.size());
-        Assert.assertEquals("anonymous", user1.state);
-        Assert.assertEquals("anonymous", user2.state);
+        Assert.assertEquals(GameType.Anonymous, user1.state);
+        Assert.assertEquals(GameType.Anonymous, user2.state);
     }
 
     @Test
@@ -73,7 +74,7 @@ public class AnonymousTest
     {
         anonymous.start(user1);
         anonymous.stop(user1);
-        Assert.assertEquals("", user1.state);
+        Assert.assertEquals(GameType.None, user1.state);
     }
 
     @Test
@@ -82,7 +83,7 @@ public class AnonymousTest
         anonymous.start(user1);
         Message message = new Message("/exit", user1);
         tester.handleMessage(message);
-        Assert.assertEquals("", user1.state);
+        Assert.assertEquals(GameType.None, user1.state);
     }
 
     @Test

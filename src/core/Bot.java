@@ -3,6 +3,7 @@ package core;
 import data.botCommands.BotCommandSet;
 import data.user.UserDatabase;
 import games.GameSet;
+import games.GameType;
 import handlers.HandlerSet;
 
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -29,7 +30,7 @@ public class Bot extends Runner implements MessageHandler
             return;
         isStopped = false;
         System.out.println("Starting...");
-        if(handleThread.isAlive())
+        if (handleThread.isAlive())
         {
             try
             {
@@ -39,9 +40,9 @@ public class Bot extends Runner implements MessageHandler
                 e.printStackTrace();
             }
         }
+        System.out.println("Started!");
         handleThread.start();
         handlers.start();
-        System.out.println("Started!");
     }
 
     public void stop()
@@ -94,7 +95,7 @@ public class Bot extends Runner implements MessageHandler
             message.user = database.getUser(message.user);
         else database.addUser(message.user);
 
-        if (message.user.state != null && !message.user.state.isEmpty())
+        if (message.user.state != GameType.None)
             games.find(message.user.state).handleMessage(message);
 
         else if (commands.hasCommand(message.text))

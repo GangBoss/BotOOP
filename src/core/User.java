@@ -1,15 +1,18 @@
 package core;
 
+import games.GameType;
+
 public class User<T>
 {
     public T id;
-    public String state;
+    public GameType state;
     public PlatformType userPlatform;
 
     public User(T id, PlatformType userPlatform)
     {
         this.id = id;
         this.userPlatform = userPlatform;
+        state = GameType.None;
     }
 
     @Override

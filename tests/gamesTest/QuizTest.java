@@ -3,6 +3,7 @@ package gamesTest;
 import core.Message;
 import core.PlatformType;
 import core.User;
+import games.GameType;
 import games.quiz.Quiz;
 import org.junit.Assert;
 import org.junit.Before;
@@ -31,7 +32,7 @@ public class QuizTest
     {
         quiz.start(user1);
         Assert.assertEquals(2, tester.queue.size());
-        Assert.assertEquals("quiz", user1.state);
+        Assert.assertEquals(GameType.Quiz, user1.state);
     }
 
     @Test
@@ -40,8 +41,8 @@ public class QuizTest
         quiz.start(user1);
         quiz.start(user2);
         Assert.assertEquals(4, tester.queue.size());
-        Assert.assertEquals("quiz", user1.state);
-        Assert.assertEquals("quiz", user2.state);
+        Assert.assertEquals(GameType.Quiz, user1.state);
+        Assert.assertEquals(GameType.Quiz, user2.state);
     }
 
     @Test
@@ -49,7 +50,7 @@ public class QuizTest
     {
         quiz.start(user1);
         quiz.stop(user1);
-        Assert.assertEquals("", user1.state);
+        Assert.assertEquals(GameType.None, user1.state);
     }
 
     @Test
@@ -58,7 +59,7 @@ public class QuizTest
         quiz.start(user1);
         Message message = new Message("/exit", user1);
         tester.handleMessage(message);
-        Assert.assertEquals("", user1.state);
+        Assert.assertEquals(GameType.None, user1.state);
     }
 
     @Test

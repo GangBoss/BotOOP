@@ -4,6 +4,7 @@ import core.Message;
 import core.MessageHandler;
 import core.User;
 import games.BaseGame;
+import games.GameType;
 import games.anonymous.commands.AnonymousCommandSet;
 
 import java.util.ArrayList;
@@ -18,6 +19,7 @@ public class Anonymous extends BaseGame
 
     public Anonymous(MessageHandler bot)
     {
+        type = GameType.Anonymous;
         this.bot = bot;
         this.searcher = new Searcher(bot);
     }
@@ -28,7 +30,7 @@ public class Anonymous extends BaseGame
         if (!users.contains(user)) users.add(user);
         searcher.addUser(user);
         sendMessage(new Message("Hello, you start anonymous. say /search to find chatmate users in db:" + users.size(), user));
-        user.state = "anonymous";
+        user.state = GameType.Anonymous;
     }
 
     @Override
@@ -37,7 +39,7 @@ public class Anonymous extends BaseGame
         sendMessage(new Message("You are living anonymous chat", user));
         //  if (searchers.contains(user)) searchers.remove(user);
         searcher.stop(user);
-        user.state = "";
+        user.state = GameType.None;
     }
 
     @Override

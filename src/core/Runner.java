@@ -9,7 +9,7 @@ public abstract class Runner
         return isStopped;
     }
 
-    public abstract void start() throws InterruptedException;
+    public abstract void start();
 
     public abstract void stop();
 }
