@@ -6,7 +6,7 @@ import java.util.ArrayList;
 public abstract class CommandBase implements Command
 {
     public String info;
-    protected ArrayList<String> includingPlatforms = new ArrayList<String>();
+    protected ArrayList<PlatformType> includingPlatforms = new ArrayList<PlatformType>();
 
     public boolean hasIncludingPlatform(PlatformType platform)
     {

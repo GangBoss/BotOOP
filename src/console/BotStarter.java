@@ -15,6 +15,8 @@ public class BotStarter
         Bot bot = new Bot(withUser);
         bot.start();
         Scanner console = new Scanner(System.in);
+        if(withUser)
+            return;
         while (!bot.getIsStopped())
         {
             if (console.nextLine().equals("exit"))

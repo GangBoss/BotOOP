@@ -42,6 +42,8 @@ public class ConsoleHandler extends BaseHandler
         while (!getIsStopped())
         {
             var input = console.nextLine();
+            if (input.equals("/exit"))
+                stop();
             handleMessage(new Message(input, user));
         }
     }

@@ -8,7 +8,7 @@ public class ExitCommand extends CommandBase
     public ExitCommand()
     {
         super("Exit from program.");
-        includingPlatforms.add("console");
+        includingPlatforms.add(PlatformType.Console);
     }
 
     @Override

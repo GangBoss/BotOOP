@@ -50,7 +50,7 @@ public class Bot extends Runner implements MessageHandler
         if (isStopped)
             return;
         isStopped = true;
-        System.out.println("Stopping...");
+        System.out.println("Stopping... May take long time.");
         handlers.stop();
         System.out.println("Stopped!");
     }
