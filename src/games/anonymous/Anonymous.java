@@ -52,7 +52,7 @@ public class Anonymous extends BaseGame
     public void handleMessage(Message message)
     {
         var user = message.user;
-        if (commands.hasCommand(message.text))
+        if (commands.hasItem(message.text))
             commands.find(message.text).execute(this, user);
         else searcher.handleMessage(message);
     }

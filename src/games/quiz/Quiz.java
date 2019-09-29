@@ -52,7 +52,7 @@ public class Quiz extends BaseGame
     @Override
     public void handleMessage(Message message)
     {
-        if (commands.hasCommand(message.text))
+        if (commands.hasItem(message.text))
             commands.find(message.text).execute(this, message.user);
         else if (questions.get(data.get(message.user).currentQuestionId).isCorrect(message.text))
         {

@@ -14,7 +14,7 @@ public class Bot extends Runner implements MessageHandler
     private UserDatabase database = new UserDatabase();
     private ConcurrentLinkedDeque<Message> messageQueue = new ConcurrentLinkedDeque<>();
     private HandlerSet handlers;
-    public final GameSet games;
+    private GameSet games;
     private Thread handleThread;
 
     public Bot(boolean withUser) throws Exception
@@ -98,8 +98,14 @@ public class Bot extends Runner implements MessageHandler
         if (message.user.state != GameType.None)
             games.find(message.user.state).handleMessage(message);
 
-        else if (commands.hasCommand(message.text))
+        else if (commands.hasItem(message.text))
             commands.find(message.text).execute(this, message.user);
         else sendMessage(new Message("Invalid command", message.user));
+    }
+
+    public void startGame(User user, GameType type)
+    {
+        if(games.hasItem(type))
+            games.find(type).start(user);
     }
 }

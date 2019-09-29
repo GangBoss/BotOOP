@@ -2,6 +2,7 @@ package core.set;
 
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Map;
 
 public abstract class BasicSet<V, T>
 {
@@ -14,9 +15,9 @@ public abstract class BasicSet<V, T>
         return set.getOrDefault(name, null);
     }
 
-    public boolean hasCommand(String name)
+    public boolean hasItem(V key)
     {
-        return set.containsKey(name);
+        return set.containsKey(key);
     }
 
     public Collection<T> getAll()

@@ -17,6 +17,6 @@ AnonymousCommand extends CommandBase
     @Override
     public void execute(MessageHandler bot, User user)
     {
-        ((Bot) bot).games.find(GameType.Anonymous).start(user);
+        ((Bot) bot).startGame(user, GameType.Anonymous);
     }
 }
