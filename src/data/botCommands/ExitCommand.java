@@ -2,7 +2,7 @@ package data.botCommands;
 
 import core.*;
 
-public class ExitCommand extends CommandBase
+public class ExitCommand extends CommandBase<Bot>
 {
 
     public ExitCommand()
@@ -12,10 +12,10 @@ public class ExitCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandler bot, User user)
+    public void execute(Bot bot, User user)
     {
-        if (!hasIncludingPlatform(user.userPlatform))
+        if (hasIncludingPlatform(user.userPlatform))
             bot.sendMessage(new Message("Invalid command", user));
-        else ((Bot) bot).stop();
+        else bot.stop();
     }
 }

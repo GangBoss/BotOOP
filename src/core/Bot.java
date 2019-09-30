@@ -2,8 +2,8 @@ package core;
 
 import data.botCommands.BotCommandSet;
 import data.user.UserDatabase;
-import games.GameSet;
-import games.GameType;
+import functions.FunctionSet;
+import functions.FunctionType;
 import handlers.HandlerSet;
 
 import java.util.concurrent.ConcurrentLinkedDeque;
@@ -14,14 +14,14 @@ public class Bot extends Runner implements MessageHandler
     private UserDatabase database = new UserDatabase();
     private ConcurrentLinkedDeque<Message> messageQueue = new ConcurrentLinkedDeque<>();
     private HandlerSet handlers;
-    private GameSet games;
+    private FunctionSet games;
     private Thread handleThread;
 
     public Bot(boolean withUser) throws Exception
     {
         handlers = new HandlerSet(this, withUser);
-        games = new GameSet(this);
-        handleThread = new Thread(() -> handleDeque());
+        games = new FunctionSet(this);
+        handleThread = new Thread(this::handleDeque);
     }
 
     public void start()
@@ -30,18 +30,8 @@ public class Bot extends Runner implements MessageHandler
             return;
         isStopped = false;
         System.out.println("Starting...");
-        if (handleThread.isAlive())
-        {
-            try
-            {
-                handleThread.wait();
-            } catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }
-        System.out.println("Started!");
         handleThread.start();
+        System.out.println("Started!");
         handlers.start();
     }
 
@@ -52,6 +42,16 @@ public class Bot extends Runner implements MessageHandler
         isStopped = true;
         System.out.println("Stopping... May take long time.");
         handlers.stop();
+        if (handleThread.isAlive())
+        {
+            try
+            {
+                handleThread.wait();
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
+        }
         System.out.println("Stopped!");
     }
 
@@ -95,15 +95,16 @@ public class Bot extends Runner implements MessageHandler
             message.user = database.getUser(message.user);
         else database.addUser(message.user);
 
-        if (message.user.state != GameType.None)
+        if (message.user.state != FunctionType.None)
             games.find(message.user.state).handleMessage(message);
 
         else if (commands.hasItem(message.text))
+        {
             commands.find(message.text).execute(this, message.user);
-        else sendMessage(new Message("Invalid command", message.user));
+        } else sendMessage(new Message("Invalid command", message.user));
     }
 
-    public void startGame(User user, GameType type)
+    public void startGame(User user, FunctionType type)
     {
         if(games.hasItem(type))
             games.find(type).start(user);

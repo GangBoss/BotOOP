@@ -1,16 +1,16 @@
-package games.quiz;
+package functions.quiz;
 
 import core.Message;
 import core.MessageHandler;
 import core.User;
-import games.BaseGame;
-import games.GameType;
-import games.quiz.commands.QuizCommandSet;
+import functions.BaseFunction;
+import functions.FunctionType;
+import functions.quiz.commands.QuizCommandSet;
 
 import java.util.HashMap;
 import java.util.Random;
 
-public class Quiz extends BaseGame
+public class Quiz extends BaseFunction
 {
     private HashMap<User, QuizData> data = new HashMap<User, QuizData>();
     private HashMap<Integer, Question> questions = new HashMap<Integer, Question>();
@@ -19,7 +19,7 @@ public class Quiz extends BaseGame
 
     public Quiz(MessageHandler bot) throws Exception
     {
-        type = GameType.Quiz;
+        type = FunctionType.Quiz;
         var questions = Converter.getQuestions();
         for (var question : questions)
             this.questions.put(question.id, question);
@@ -31,7 +31,7 @@ public class Quiz extends BaseGame
     {
         if (!data.containsKey(user)) data.put(user, new QuizData());
         sendMessage(new Message("Hello, you start quiz game. If you want exit from quiz type /exit", user));
-        user.state = GameType.Quiz;
+        user.state = FunctionType.Quiz;
         var uData = data.get(user);
         uData.currentQuestionId = getRandomQuestionId();
         sendMessage(new Message(questions.get(uData.currentQuestionId).question, user));
@@ -40,7 +40,7 @@ public class Quiz extends BaseGame
     @Override
     public void stop(User user)
     {
-        user.state = GameType.None;
+        user.state = FunctionType.None;
     }
 
     @Override

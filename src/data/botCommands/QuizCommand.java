@@ -2,11 +2,10 @@ package data.botCommands;
 
 import core.Bot;
 import core.CommandBase;
-import core.MessageHandler;
 import core.User;
-import games.GameType;
+import functions.FunctionType;
 
-public class QuizCommand extends CommandBase
+public class QuizCommand extends CommandBase<Bot>
 {
     public QuizCommand()
     {
@@ -14,8 +13,8 @@ public class QuizCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandler bot, User user)
+    public void execute(Bot bot, User user)
     {
-        ((Bot) bot).startGame(user, GameType.Quiz);
+        bot.startGame(user, FunctionType.Quiz);
     }
 }

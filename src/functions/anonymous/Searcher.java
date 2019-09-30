@@ -1,4 +1,4 @@
-package games.anonymous;
+package functions.anonymous;
 
 import core.Message;
 import core.MessageHandler;

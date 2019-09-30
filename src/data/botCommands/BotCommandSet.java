@@ -1,11 +1,11 @@
 package data.botCommands;
 
 import core.CommandBase;
-import core.set.StringSet;
+import core.set.CommandSet;
 
 import java.util.HashMap;
 
-public class BotCommandSet extends StringSet<CommandBase>
+public class BotCommandSet extends CommandSet
 {
     public BotCommandSet()
     {

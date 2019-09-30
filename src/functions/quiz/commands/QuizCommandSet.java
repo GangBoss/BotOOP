@@ -1,11 +1,10 @@
-package games.quiz.commands;
+package functions.quiz.commands;
 
-import core.CommandBase;
-import core.set.StringSet;
+import core.set.CommandSet;
 
 import java.util.HashMap;
 
-public class QuizCommandSet extends StringSet<CommandBase>
+public class QuizCommandSet extends CommandSet
 {
     public QuizCommandSet()
     {

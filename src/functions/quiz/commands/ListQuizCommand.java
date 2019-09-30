@@ -1,4 +1,4 @@
-package games.quiz.commands;
+package functions.quiz.commands;
 
 import data.botCommands.ListCommand;
 

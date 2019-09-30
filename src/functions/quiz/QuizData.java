@@ -1,4 +1,4 @@
-package games.quiz;
+package functions.quiz;
 
 public class QuizData
 {

@@ -1,15 +1,15 @@
-package games.anonymous.commands;
+package functions.anonymous.commands;
 
 import core.CommandBase;
 import core.MessageHandler;
 import core.User;
-import games.anonymous.Anonymous;
+import functions.anonymous.Anonymous;
 
 public class AbandonChatAnonymousCommand extends CommandBase
 {
     public AbandonChatAnonymousCommand()
     {
-        super("Abbaadon from chat");
+        super("Abandon from chat");
     }
 
     @Override

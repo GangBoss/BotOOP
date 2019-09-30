@@ -4,13 +4,13 @@ import core.CommandBase;
 import core.Message;
 import core.MessageHandler;
 import core.User;
-import core.set.StringSet;
+import core.set.CommandSet;
 
-public class ListCommand<T extends StringSet<CommandBase>> extends CommandBase
+public class ListCommand extends CommandBase
 {
-    private T commands;
+    private CommandSet commands;
 
-    public ListCommand(T commands)
+    public ListCommand(CommandSet commands)
     {
         super("Print all commands");
         this.commands = commands;
@@ -22,7 +22,7 @@ public class ListCommand<T extends StringSet<CommandBase>> extends CommandBase
         StringBuilder result = new StringBuilder();
         for (var command : commands.getAll())
         {
-            if (!command.hasIncludingPlatform(user.userPlatform))
+            if (command.hasIncludingPlatform(user.userPlatform))
                 continue;
             Class<?> enclosingClass = command.getClass().getEnclosingClass();
             String name;

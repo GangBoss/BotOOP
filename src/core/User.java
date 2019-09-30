@@ -1,18 +1,18 @@
 package core;
 
-import games.GameType;
+import functions.FunctionType;
 
 public class User<T>
 {
     public T id;
-    public GameType state;
+    public FunctionType state;
     public PlatformType userPlatform;
 
     public User(T id, PlatformType userPlatform)
     {
         this.id = id;
         this.userPlatform = userPlatform;
-        state = GameType.None;
+        state = FunctionType.None;
     }
 
     @Override

@@ -1,4 +1,4 @@
-package games.quiz;
+package functions.quiz;
 
 import java.nio.charset.Charset;
 import java.nio.file.Files;

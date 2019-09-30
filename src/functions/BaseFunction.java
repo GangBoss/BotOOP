@@ -1,13 +1,13 @@
-package games;
+package functions;
 
 import core.MessageHandler;
 import core.User;
 
-public abstract class BaseGame implements MessageHandler
+public abstract class BaseFunction implements MessageHandler
 {
-    protected GameType type;
+    protected FunctionType type;
 
-    public GameType getType(){
+    public FunctionType getType(){
         return type;
     }
 

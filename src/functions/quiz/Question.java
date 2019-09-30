@@ -1,4 +1,4 @@
-package games.quiz;
+package functions.quiz;
 
 import java.util.Objects;
 

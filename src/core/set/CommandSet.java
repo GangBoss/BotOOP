@@ -1,6 +1,8 @@
 package core.set;
 
-public class StringSet<T> extends BasicSet<String, T>
+import core.CommandBase;
+
+public class CommandSet extends BasicSet<String, CommandBase>
 {
     protected int prefixCount = 0;
     protected int suffixCount = 0;
@@ -22,7 +24,7 @@ public class StringSet<T> extends BasicSet<String, T>
     }
 
     @Override
-    protected void add(T item)
+    protected void add(CommandBase item)
     {
         Class<?> enclosingClass = item.getClass().getEnclosingClass();
         String name;

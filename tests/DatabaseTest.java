@@ -68,7 +68,7 @@ public class DatabaseTest
     }
 
     @Test
-    public void RemoveExsistedUser()
+    public void RemoveExistedUser()
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         database.addUser(consoleUser);
@@ -77,7 +77,7 @@ public class DatabaseTest
     }
 
     @Test
-    public void RemoveNonExsistedUser()
+    public void RemoveNonExistedUser()
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         try
@@ -91,7 +91,7 @@ public class DatabaseTest
     }
 
     @Test
-    public void GetExsistedUser()
+    public void GetExistedUser()
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         database.addUser(consoleUser);

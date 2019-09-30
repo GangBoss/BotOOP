@@ -1,11 +1,10 @@
-package games.anonymous.commands;
+package functions.anonymous.commands;
 
-import core.CommandBase;
-import core.set.StringSet;
+import core.set.CommandSet;
 
 import java.util.HashMap;
 
-public class AnonymousCommandSet extends StringSet<CommandBase>
+public class AnonymousCommandSet extends CommandSet
 {
     public AnonymousCommandSet()
     {

@@ -21,7 +21,7 @@ class PlatformUsers<T> extends HashMap
         users.remove(userId);
     }
 
-    boolean hasUser(User user) throws IllegalArgumentException
+    boolean hasUser(User user) 
     {
         return users.containsKey(user.id);
     }

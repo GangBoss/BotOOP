@@ -1,4 +1,4 @@
-package games.anonymous.commands;
+package functions.anonymous.commands;
 
 import data.botCommands.ListCommand;
 

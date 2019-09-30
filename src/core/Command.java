@@ -1,6 +1,6 @@
 package core;
 
-public interface Command
+public interface Command<T extends MessageHandler>
 {
-    void execute(MessageHandler bot, User user);
+    void execute(T bot, User user);
 }
