@@ -8,12 +8,8 @@ public class AnonymousCommandSet extends CommandSet
 {
     public AnonymousCommandSet()
     {
-        set = new HashMap<>();
-        suffixCount = "AnonymousCommand".length();
-        prefixCount = 0;
-        commandPrefix = "/";
+        super(0,16,"/");
 
-        add(new ListAnonymousCommand(this));
         add(new ExitAnonymousCommand());
         add(new SearchAnonymousCommand());
         add(new SearchingAnonymousCommand());

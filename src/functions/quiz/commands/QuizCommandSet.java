@@ -8,12 +8,8 @@ public class QuizCommandSet extends CommandSet
 {
     public QuizCommandSet()
     {
-        set = new HashMap<>();
-        suffixCount = 11;
-        commandPrefix = "/";
-
+        super(0,11,"/");
         add(new ExitQuizCommand());
         add(new NextQuizCommand());
-        add(new ListQuizCommand(this));
     }
 }

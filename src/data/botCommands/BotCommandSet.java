@@ -8,12 +8,8 @@ public class BotCommandSet extends CommandSet
 {
     public BotCommandSet()
     {
-        set = new HashMap<>();
-        prefixCount = 0;
-        suffixCount = 7;
-        commandPrefix = "/";
+        super(0,7,"/");
 
-        add(new ListCommand(this));
         add(new QuizCommand());
         add(new ExitCommand());
         add(new StartCommand());
