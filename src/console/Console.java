@@ -22,10 +22,8 @@ public class Console
                     withUser = true;
                     break;
                 } else if (input.isEmpty() || input.equals("n"))
-                {
-                    withUser = false;
                     break;
-                } else System.out.println("Invalid parameter");
+                else System.out.println("Invalid parameter");
             }
         }
         else withUser = !args[0].equals("n");

@@ -9,9 +9,9 @@ import java.util.HashMap;
 
 public class Searcher
 {
-    private ArrayList<User> data = new ArrayList<User>();
-    private ArrayList<User> searchers = new ArrayList<User>();
-    private HashMap<User, User> pairs = new HashMap<User, User>();
+    private ArrayList<User> data = new ArrayList<>();
+    private ArrayList<User> searchers = new ArrayList<>();
+    private HashMap<User, User> pairs = new HashMap<>();
     private MessageHandler bot;
 
     public Searcher(MessageHandler bot)

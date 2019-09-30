@@ -12,8 +12,8 @@ import java.util.Random;
 
 public class Quiz extends BaseFunction
 {
-    private HashMap<User, QuizData> data = new HashMap<User, QuizData>();
-    private HashMap<Integer, Question> questions = new HashMap<Integer, Question>();
+    private HashMap<User, QuizData> data = new HashMap<>();
+    private HashMap<Integer, Question> questions = new HashMap<>();
     private QuizCommandSet commands = new QuizCommandSet();
     private MessageHandler bot;
 
