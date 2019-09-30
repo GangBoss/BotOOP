@@ -2,7 +2,6 @@ package core.set;
 
 import java.util.Collection;
 import java.util.HashMap;
-import java.util.Map;
 
 public abstract class BasicSet<V, T>
 {

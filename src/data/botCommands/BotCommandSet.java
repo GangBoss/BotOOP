@@ -1,6 +1,5 @@
 package data.botCommands;
 
-import core.CommandBase;
 import core.set.CommandSet;
 
 import java.util.HashMap;

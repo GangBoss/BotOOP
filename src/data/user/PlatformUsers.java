@@ -1,6 +1,5 @@
 package data.user;
 
-import core.PlatformType;
 import core.User;
 
 import java.util.HashMap;
@@ -21,7 +20,7 @@ class PlatformUsers<T> extends HashMap
         users.remove(userId);
     }
 
-    boolean hasUser(User user) 
+    boolean hasUser(User user)
     {
         return users.containsKey(user.id);
     }

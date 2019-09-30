@@ -7,7 +7,8 @@ public abstract class BaseFunction implements MessageHandler
 {
     protected FunctionType type;
 
-    public FunctionType getType(){
+    public FunctionType getType()
+    {
         return type;
     }
 

@@ -25,12 +25,11 @@ public class Console
                     break;
                 else System.out.println("Invalid parameter");
             }
-        }
-        else withUser = !args[0].equals("n");
+        } else withUser = !args[0].equals("n");
 
         Bot bot = new Bot(withUser);
         bot.start();
-        if(withUser)
+        if (withUser)
             return;
         while (!bot.getIsStopped())
         {

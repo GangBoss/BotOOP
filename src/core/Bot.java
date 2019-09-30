@@ -106,7 +106,7 @@ public class Bot extends Runner implements MessageHandler
 
     public void startGame(User user, FunctionType type)
     {
-        if(games.hasItem(type))
+        if (games.hasItem(type))
             games.find(type).start(user);
     }
 }
