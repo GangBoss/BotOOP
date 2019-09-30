@@ -58,7 +58,7 @@ public class Bot extends Runner implements MessageHandler
     @Override
     public void sendMessage(Message message)
     {
-        handlers.find(message.user.userPlatform).sendMessage(message);
+        handlers.find(message.user.getUserPlatform()).sendMessage(message);
     }
 
     public synchronized void addMessageToHandle(Message message)

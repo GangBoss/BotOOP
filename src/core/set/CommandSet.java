@@ -8,6 +8,8 @@ public class CommandSet extends BasicSet<String, CommandBase>
     protected int suffixCount = 0;
     protected String commandPrefix = "";
 
+
+
     public int getPrefixCount()
     {
         return prefixCount;

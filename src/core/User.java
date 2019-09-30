@@ -4,9 +4,17 @@ import functions.FunctionType;
 
 public class User<T>
 {
-    public T id;
+    private T id;
     public FunctionType state;
-    public PlatformType userPlatform;
+    private PlatformType userPlatform;
+
+    public T getId(){
+        return id;
+    }
+
+    public PlatformType getUserPlatform(){
+        return userPlatform;
+    }
 
     public User(T id, PlatformType userPlatform)
     {

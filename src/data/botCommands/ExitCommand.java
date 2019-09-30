@@ -14,7 +14,7 @@ public class ExitCommand extends CommandBase<Bot>
     @Override
     public void execute(Bot bot, User user)
     {
-        if (hasIncludingPlatform(user.userPlatform))
+        if (hasIncludingPlatform(user.getUserPlatform()))
             bot.sendMessage(new Message("Invalid command", user));
         else bot.stop();
     }

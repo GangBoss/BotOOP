@@ -22,7 +22,7 @@ public class ListCommand extends CommandBase
         StringBuilder result = new StringBuilder();
         for (var command : commands.getAll())
         {
-            if (command.hasIncludingPlatform(user.userPlatform))
+            if (command.hasIncludingPlatform(user.getUserPlatform()))
                 continue;
             Class<?> enclosingClass = command.getClass().getEnclosingClass();
             String name;

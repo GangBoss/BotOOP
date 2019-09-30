@@ -10,9 +10,9 @@ class PlatformUsers<T> extends HashMap
 
     void addUser(User<T> user)
     {
-        if (users.containsKey(user.id))
+        if (users.containsKey(user.getId()))
             return;
-        users.put(user.id, user);
+        users.put(user.getId(), user);
     }
 
     void removeUser(T userId)
@@ -22,13 +22,13 @@ class PlatformUsers<T> extends HashMap
 
     boolean hasUser(User user)
     {
-        return users.containsKey(user.id);
+        return users.containsKey(user.getId());
     }
 
     User getUser(User user)
     {
         if (hasUser(user))
-            return users.get(user.id);
+            return users.get(user.getId());
         return null;
     }
 }

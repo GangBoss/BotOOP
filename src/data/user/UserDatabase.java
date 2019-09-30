@@ -11,26 +11,26 @@ public class UserDatabase
 
     public boolean hasUser(User user)
     {
-        if (!platforms.containsKey(user.userPlatform)) return false;
-        return platforms.get(user.userPlatform).hasUser(user);
+        if (!platforms.containsKey(user.getUserPlatform())) return false;
+        return platforms.get(user.getUserPlatform()).hasUser(user);
     }
 
     public void addUser(User user)
     {
-        if (!platforms.containsKey(user.userPlatform))
-            platforms.put(user.userPlatform, new PlatformUsers<>());
-        platforms.get(user.userPlatform).addUser(user);
+        if (!platforms.containsKey(user.getUserPlatform()))
+            platforms.put(user.getUserPlatform(), new PlatformUsers<>());
+        platforms.get(user.getUserPlatform()).addUser(user);
     }
 
     public void removeUser(User user)
     {
-        platforms.get(user.userPlatform).removeUser(user.id);
+        platforms.get(user.getUserPlatform()).removeUser(user.getId());
     }
 
     public User getUser(User user)
     {
-        if (platforms.containsKey(user.userPlatform))
-            return platforms.get(user.userPlatform).getUser(user);
+        if (platforms.containsKey(user.getUserPlatform()))
+            return platforms.get(user.getUserPlatform()).getUser(user);
         return null;
     }
 }
