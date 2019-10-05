@@ -11,7 +11,6 @@ import java.util.concurrent.ConcurrentLinkedDeque;
 public class Bot extends Runner implements MessageHandler
 {
     private BotCommandSet commands = new BotCommandSet();
-    private UserDatabase database = new UserDatabase();
     private ConcurrentLinkedDeque<Message> messageQueue = new ConcurrentLinkedDeque<>();
     private HandlerSet handlers;
     private FunctionSet games;
@@ -58,7 +57,7 @@ public class Bot extends Runner implements MessageHandler
     @Override
     public void sendMessage(Message message)
     {
-        handlers.find(message.user.getUserPlatform()).sendMessage(message);
+        handlers.find(message.id.getUserPlatform()).sendMessage(message);
     }
 
     public synchronized void addMessageToHandle(Message message)
@@ -90,18 +89,18 @@ public class Bot extends Runner implements MessageHandler
     public void handleMessage(Message message)
     {
         message.text = message.text.toLowerCase();
+        User user;
+        if (UserDatabase.hasUser(message.id))
+            user = UserDatabase.getUser(message.id);
+        else user = UserDatabase.addUser(message.id);
 
-        if (database.hasUser(message.user))
-            message.user = database.getUser(message.user);
-        else database.addUser(message.user);
-
-        if (message.user.state != FunctionType.None)
-            games.find(message.user.state).handleMessage(message);
+        if (user.state != FunctionType.None)
+            games.find(user.state).handleMessage(message);
 
         else if (commands.hasItem(message.text))
         {
-            commands.find(message.text).execute(this, message.user);
-        } else sendMessage(new Message("Invalid command", message.user));
+            commands.find(message.text).execute(this, user);
+        } else sendMessage(new Message("Invalid command", message.id));
     }
 
     public void startGame(User user, FunctionType type)

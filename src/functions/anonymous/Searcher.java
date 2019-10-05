@@ -3,6 +3,7 @@ package functions.anonymous;
 import core.Message;
 import core.MessageHandler;
 import core.User;
+import data.user.UserDatabase;
 
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -76,11 +77,12 @@ public class Searcher
 
     public void handleMessage(Message message)
     {
-        if (pairs.containsKey(message.user))
-            bot.sendMessage(new Message(message.text, pairs.get(message.user)));
-        else if (searchers.contains(message.user))
-            bot.sendMessage(new Message("You still Searching a chatmate", message.user));
+        var user = UserDatabase.getUser(message.id);
+        if (pairs.containsKey(user))
+            bot.sendMessage(new Message(message.text, pairs.get(user)));
+        else if (searchers.contains(user))
+            bot.sendMessage(new Message("You still Searching a chatmate", message.id));
         else
-            bot.sendMessage(new Message("It is not a command and u are not in anonymous chat yet", message.user));
+            bot.sendMessage(new Message("It is not a command and u are not in anonymous chat yet", message.id));
     }
 }

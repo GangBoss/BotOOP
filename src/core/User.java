@@ -4,30 +4,38 @@ import functions.FunctionType;
 
 public class User<T>
 {
-    private T id;
     public FunctionType state;
-    private PlatformType userPlatform;
+    private Id<T> id;
 
-    public T getId(){
+    public Id<T> getFullId(){
         return id;
     }
 
+    public T getId()
+    {
+        return id.getId();
+    }
+
     public PlatformType getUserPlatform(){
-        return userPlatform;
+        return id.getUserPlatform();
     }
 
     public User(T id, PlatformType userPlatform)
     {
+        this.id = new Id<>(id, userPlatform);
+        state = FunctionType.None;
+    }
+
+    public User(Id<T> id)
+    {
         this.id = id;
-        this.userPlatform = userPlatform;
         state = FunctionType.None;
     }
 
     @Override
     public int hashCode()
     {
-        String builder = id.toString() + userPlatform.name().toLowerCase();
-        return builder.hashCode();
+        return id.hashCode();
     }
 
     @Override
@@ -36,7 +44,7 @@ public class User<T>
         if (obj instanceof User)
         {
             var other = (User<?>) obj;
-            return other.id.equals(id) && other.userPlatform.equals(userPlatform);
+            return id.equals(other.id);
         }
         return false;
     }

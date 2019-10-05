@@ -3,11 +3,16 @@ package core;
 public class Message
 {
     public String text;
-    public User user;
+    public Id id;
 
-    public Message(String text, User user)
+    public Message(String text, Id id)
     {
         this.text = text;
-        this.user = user;
+        this.id = id;
+    }
+
+    public Message(String text, User user){
+        this.text = text;
+        this.id = user.getFullId();
     }
 }

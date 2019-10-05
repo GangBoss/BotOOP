@@ -33,7 +33,7 @@ public class TelegramBot extends TelegramLongPollingBot
     {
         SendMessage send = new SendMessage();
         send.setText(message.text);
-        send.setChatId((Long) message.user.getId());
+        send.setChatId((Long) message.id.getId());
         try
         {
             execute(send);

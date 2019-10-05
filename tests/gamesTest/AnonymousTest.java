@@ -3,6 +3,7 @@ package gamesTest;
 import core.Message;
 import core.PlatformType;
 import core.User;
+import data.user.UserDatabase;
 import functions.FunctionType;
 import functions.anonymous.Anonymous;
 import org.junit.Assert;
@@ -20,8 +21,11 @@ public class AnonymousTest
     @Before
     public void setUp() throws Exception
     {
+        UserDatabase.clear();
         user1 = new User<>("user1", PlatformType.Console);
         user2 = new User<>("user2", PlatformType.Console);
+        UserDatabase.addUser(user1);
+        UserDatabase.addUser(user2);
         tester = new TestMessageHandler();
         anonymous = new Anonymous(tester);
         tester.setTestedHandler(anonymous);

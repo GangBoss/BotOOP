@@ -3,6 +3,7 @@ package functions.anonymous;
 import core.Message;
 import core.MessageHandler;
 import core.User;
+import data.user.UserDatabase;
 import functions.BaseFunction;
 import functions.FunctionType;
 import functions.anonymous.commands.AnonymousCommandSet;
@@ -50,7 +51,7 @@ public class Anonymous extends BaseFunction
     @Override
     public void handleMessage(Message message)
     {
-        var user = message.user;
+        var user = UserDatabase.getUser(message.id);
         if (commands.hasItem(message.text))
             commands.find(message.text).execute(this, user);
         else searcher.handleMessage(message);

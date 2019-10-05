@@ -1,4 +1,3 @@
-import com.fasterxml.jackson.annotation.JsonTypeInfo;
 import core.PlatformType;
 import core.User;
 import data.user.UserDatabase;
@@ -8,20 +7,18 @@ import org.junit.Test;
 
 public class DatabaseTest
 {
-    private UserDatabase database;
 
     @Before
-    public void setUp()
-    {
-        database = new UserDatabase();
+    public void SetUp(){
+        UserDatabase.clear();
     }
 
     @Test
     public void addOneBaseConsoleUser()
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
-        database.addUser(consoleUser);
-        Assert.assertTrue(database.hasUser(consoleUser));
+        UserDatabase.addUser(consoleUser);
+        Assert.assertTrue(UserDatabase.hasUser(consoleUser));
     }
 
     @Test
@@ -29,10 +26,10 @@ public class DatabaseTest
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         var consoleUserTwo = new User<>("TestUser2", PlatformType.Console);
-        database.addUser(consoleUser);
-        database.addUser(consoleUserTwo);
-        Assert.assertTrue(database.hasUser(consoleUser));
-        Assert.assertTrue(database.hasUser(consoleUserTwo));
+        UserDatabase.addUser(consoleUser);
+        UserDatabase.addUser(consoleUserTwo);
+        Assert.assertTrue(UserDatabase.hasUser(consoleUser));
+        Assert.assertTrue(UserDatabase.hasUser(consoleUserTwo));
     }
 
     @Test
@@ -40,10 +37,10 @@ public class DatabaseTest
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         var consoleUserTwo = new User<>("TestUser", PlatformType.Console);
-        database.addUser(consoleUser);
-        database.addUser(consoleUserTwo);
-        Assert.assertTrue(database.hasUser(consoleUser));
-        Assert.assertTrue(database.hasUser(consoleUserTwo));
+        UserDatabase.addUser(consoleUser);
+        UserDatabase.addUser(consoleUserTwo);
+        Assert.assertTrue(UserDatabase.hasUser(consoleUser));
+        Assert.assertTrue(UserDatabase.hasUser(consoleUserTwo));
     }
 
     @Test
@@ -51,9 +48,9 @@ public class DatabaseTest
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         var consoleUserTwo = new User<>("TestUser2", PlatformType.Console);
-        database.addUser(consoleUser);
-        Assert.assertTrue(database.hasUser(consoleUser));
-        Assert.assertFalse(database.hasUser(consoleUserTwo));
+        UserDatabase.addUser(consoleUser);
+        Assert.assertTrue(UserDatabase.hasUser(consoleUser));
+        Assert.assertFalse(UserDatabase.hasUser(consoleUserTwo));
     }
 
     @Test
@@ -61,19 +58,19 @@ public class DatabaseTest
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         var telegramUser = new User<>(123, PlatformType.Telegram);
-        database.addUser(consoleUser);
-        database.addUser(telegramUser);
-        Assert.assertTrue(database.hasUser(consoleUser));
-        Assert.assertTrue(database.hasUser(telegramUser));
+        UserDatabase.addUser(consoleUser);
+        UserDatabase.addUser(telegramUser);
+        Assert.assertTrue(UserDatabase.hasUser(consoleUser));
+        Assert.assertTrue(UserDatabase.hasUser(telegramUser));
     }
 
     @Test
     public void RemoveExistedUser()
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
-        database.addUser(consoleUser);
-        database.removeUser(consoleUser);
-        Assert.assertFalse(database.hasUser(consoleUser));
+        UserDatabase.addUser(consoleUser);
+        UserDatabase.removeUser(consoleUser);
+        Assert.assertFalse(UserDatabase.hasUser(consoleUser));
     }
 
     @Test
@@ -82,7 +79,7 @@ public class DatabaseTest
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         try
         {
-            database.removeUser(consoleUser);
+            UserDatabase.removeUser(consoleUser);
         } catch (Exception ignored)
         {
             return;
@@ -94,15 +91,15 @@ public class DatabaseTest
     public void GetExistedUser()
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
-        database.addUser(consoleUser);
-        Assert.assertEquals(consoleUser, database.getUser(consoleUser));
+        UserDatabase.addUser(consoleUser);
+        Assert.assertEquals(consoleUser, UserDatabase.getUser(consoleUser));
     }
 
     @Test
     public void GetNonExistedPlatform()
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
-        Assert.assertNull(database.getUser(consoleUser));
+        Assert.assertNull(UserDatabase.getUser(consoleUser));
     }
 
     @Test
@@ -110,8 +107,8 @@ public class DatabaseTest
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         var consoleUserTwo = new User<>("TestUser2", PlatformType.Console);
-        database.addUser(consoleUser);
-        Assert.assertNull(database.getUser(consoleUserTwo));
+        UserDatabase.addUser(consoleUser);
+        Assert.assertNull(UserDatabase.getUser(consoleUserTwo));
     }
 
     @Test
@@ -119,9 +116,9 @@ public class DatabaseTest
     {
         var consoleUser = new User<>("TestUser", PlatformType.Console);
         var consoleUserTwo = new User<>(123, PlatformType.Console);
-        database.addUser(consoleUser);
-        database.addUser(consoleUserTwo);
-        Assert.assertTrue(database.hasUser(consoleUser));
-        Assert.assertTrue(database.hasUser(consoleUserTwo));
+        UserDatabase.addUser(consoleUser);
+        UserDatabase.addUser(consoleUserTwo);
+        Assert.assertTrue(UserDatabase.hasUser(consoleUser));
+        Assert.assertTrue(UserDatabase.hasUser(consoleUserTwo));
     }
 }

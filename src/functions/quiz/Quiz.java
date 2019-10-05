@@ -3,6 +3,7 @@ package functions.quiz;
 import core.Message;
 import core.MessageHandler;
 import core.User;
+import data.user.UserDatabase;
 import functions.BaseFunction;
 import functions.FunctionType;
 import functions.quiz.commands.QuizCommandSet;
@@ -52,18 +53,19 @@ public class Quiz extends BaseFunction
     @Override
     public void handleMessage(Message message)
     {
+        var user = UserDatabase.getUser(message.id);
         if (commands.hasItem(message.text))
-            commands.find(message.text).execute(this, message.user);
-        else if (questions.get(data.get(message.user).currentQuestionId).isCorrect(message.text))
+            commands.find(message.text).execute(this, user);
+        else if (questions.get(data.get(user).currentQuestionId).isCorrect(message.text))
         {
-            var quizData = data.get(message.user);
+            var quizData = data.get(user);
             quizData.rightAnswers++;
             quizData.currentQuestionId = getRandomQuestionId();
-            sendMessage(new Message("Правильно", message.user));
-            sendMessage(new Message(questions.get(quizData.currentQuestionId).question, message.user));
+            sendMessage(new Message("Правильно", message.id));
+            sendMessage(new Message(questions.get(quizData.currentQuestionId).question, message.id));
         } else
         {
-            sendMessage(new Message("Wrong answer", message.user));
+            sendMessage(new Message("Wrong answer", message.id));
         }
     }
 
