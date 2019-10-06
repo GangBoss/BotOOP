@@ -10,5 +10,4 @@ Bot for oop practice
 
 ## Tasks:
 
- - [x] Telegram
  - [x] Quiz
