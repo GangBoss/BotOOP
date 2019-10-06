@@ -2,3 +2,4 @@
 out
 Bot.iml
 src/handlers/telegram/TelegramData.java
+/res/Settings.json
