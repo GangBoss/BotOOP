@@ -12,7 +12,8 @@ Bot for oop practice
 
  - [x] Quiz
  - [x] AddButtons
- - [] Add common messange Handler to all games cos part of the game
+ - [] Add messanges extends base message for all platforms
+ - [] Add resending message in Anonimous chat
  - [] Add group chat Rpg
  - [] Add group chat quiz
- - [] Add admin mod for quiz room
+ - [] Add admin mod for quiz rooms
