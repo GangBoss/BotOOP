@@ -8,11 +8,15 @@ import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
+import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.Collections;
 
 public class TelegramBot extends TelegramLongPollingBot
 {
@@ -20,7 +24,7 @@ public class TelegramBot extends TelegramLongPollingBot
     private String username;
     private String token;
 
-    public TelegramBot(BaseHandler handler)
+    TelegramBot(BaseHandler handler)
     {
         this.handler = handler;
         var path = Paths.get(System.getProperty("user.dir") + "\\res\\Settings.json");
@@ -29,7 +33,7 @@ public class TelegramBot extends TelegramLongPollingBot
             var object = new JSONObject(Files.readString(path));
             var telegram = object.getJSONObject("telegram");
             username = telegram.getString("username");
-            token  = telegram.getString("token");
+            token = telegram.getString("token");
 
         } catch (IOException e)
         {
@@ -43,16 +47,14 @@ public class TelegramBot extends TelegramLongPollingBot
         Message message = update.getMessage();
         if (message != null && message.hasText() && message.isUserMessage())
         {
-            var user = new User<>(message.getChatId(), PlatformType.Telegram);
-            handler.handleMessage(new core.Message(message.getText(), user));
+            var coreMess = new core.Message(message);
+            handler.handleMessage(coreMess);
         }
     }
 
     public void sendMessage(core.Message message)
     {
-        SendMessage send = new SendMessage();
-        send.setText(message.text);
-        send.setChatId((Long) message.id.getId());
+        SendMessage send = convertToSendMessage(message);
         try
         {
             execute(send);
@@ -60,6 +62,28 @@ public class TelegramBot extends TelegramLongPollingBot
         {
             System.out.println("Cant send message");
         }
+    }
+
+    private SendMessage convertToSendMessage(core.Message message)
+    {
+        var send = new SendMessage();
+        if (message != null)
+        {
+            send.setChatId((Long) message.id.getId());
+            if (message.hasText())
+                send.setText(message.text);
+            if (!(message.buttons.isEmpty()))
+            {
+                var markup = new ReplyKeyboardMarkup();
+                markup.setResizeKeyboard(true);
+                var row = new KeyboardRow();
+                row.addAll(message.buttons);
+                var rows = Collections.singletonList(row);
+                markup.setKeyboard(rows);
+                send.setReplyMarkup(markup);
+            }
+        }
+        return send;
     }
 
     @Override
@@ -73,4 +97,5 @@ public class TelegramBot extends TelegramLongPollingBot
     {
         return token;
     }
+
 }

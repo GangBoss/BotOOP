@@ -11,3 +11,8 @@ Bot for oop practice
 ## Tasks:
 
  - [x] Quiz
+ - [x] AddButtons
+ - [] Add common messange Handler to all games cos part of the game
+ - [] Add group chat Rpg
+ - [] Add group chat quiz
+ - [] Add admin mod for quiz room

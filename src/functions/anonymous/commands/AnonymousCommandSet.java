@@ -8,7 +8,7 @@ public class AnonymousCommandSet extends CommandSet
 {
     public AnonymousCommandSet()
     {
-        super(0,16,"/");
+        super(0,"AnonymousCommand".length(),"/");
 
         add(new ExitAnonymousCommand());
         add(new SearchAnonymousCommand());

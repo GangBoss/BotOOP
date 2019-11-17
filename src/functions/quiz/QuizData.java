@@ -1,8 +1,11 @@
 package functions.quiz;
 
+import java.util.ArrayList;
+
 public class QuizData
 {
-    public int currentQuestionId;
-    public int rightAnswers;
-    public int wrongAnswers;
+    QuizState state;
+    int currentQuestionId;
+    int rightAnswers;
+    int wrongAnswers;
 }

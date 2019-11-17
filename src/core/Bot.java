@@ -6,6 +6,8 @@ import functions.FunctionSet;
 import functions.FunctionType;
 import handlers.HandlerSet;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
 
 public class Bot extends Runner implements MessageHandler
@@ -54,16 +56,41 @@ public class Bot extends Runner implements MessageHandler
         System.out.println("Stopped!");
     }
 
-    @Override
-    public void sendMessage(Message message)
+    public void startGame(User user, FunctionType type)
     {
-        handlers.find(message.id.getUserPlatform()).sendMessage(message);
+        if (games.hasItem(type))
+            games.find(type).start(user);
     }
 
     public synchronized void addMessageToHandle(Message message)
     {
         messageQueue.add(message);
         this.notify();
+    }
+
+    @Override
+    public void sendMessage(Message message)
+    {
+        message.buttons = getButtons(UserDatabase.getUser(message.id));
+        handlers.find(message.id.getUserPlatform()).sendMessage(message);
+    }
+
+    @Override
+    public void handleMessage(Message message)
+    {
+        message.text = message.text.toLowerCase();
+        User user;
+        if (UserDatabase.hasUser(message.id))
+            user = UserDatabase.getUser(message.id);
+        else user = UserDatabase.addUser(message.id);
+
+        if (user.state != FunctionType.None)
+            games.find(user.state).handleMessage(message);
+
+        else if (commands.hasItem(message.text))
+        {
+            commands.find(message.text).execute(this, user);
+        } else sendMessage(new Message("Invalid command", message.id));
     }
 
     private synchronized void handleDeque()
@@ -85,27 +112,16 @@ public class Bot extends Runner implements MessageHandler
         }
     }
 
-    @Override
-    public void handleMessage(Message message)
+    private ArrayList<String> getButtons(User user)
     {
-        message.text = message.text.toLowerCase();
-        User user;
-        if (UserDatabase.hasUser(message.id))
-            user = UserDatabase.getUser(message.id);
-        else user = UserDatabase.addUser(message.id);
 
-        if (user.state != FunctionType.None)
-            games.find(user.state).handleMessage(message);
-
-        else if (commands.hasItem(message.text))
-        {
-            commands.find(message.text).execute(this, user);
-        } else sendMessage(new Message("Invalid command", message.id));
-    }
-
-    public void startGame(User user, FunctionType type)
-    {
-        if (games.hasItem(type))
-            games.find(type).start(user);
+        if (user.state == FunctionType.None)
+            return new ArrayList<>()
+            {{
+                add("/start");
+                add("/list");
+            }};
+        return games.find(user.state).getButtons(user);
     }
 }
+

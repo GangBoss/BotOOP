@@ -12,7 +12,7 @@ import org.telegram.telegrambots.meta.generics.BotSession;
 public class TelegramHandler extends BaseHandler
 {
     private Bot bot;
-    private TelegramBot tBotHandler;
+    private TelegramBot telegramBot;
     private BotSession session;
 
     public TelegramHandler(Bot bot)
@@ -25,7 +25,7 @@ public class TelegramHandler extends BaseHandler
     @Override
     public void sendMessage(Message message)
     {
-        tBotHandler.sendMessage(message);
+        telegramBot.sendMessage(message);
     }
 
     @Override
@@ -40,8 +40,8 @@ public class TelegramHandler extends BaseHandler
         TelegramBotsApi tBot = new TelegramBotsApi();
         try
         {
-            tBotHandler = new TelegramBot(this);
-            session = tBot.registerBot(tBotHandler);
+            telegramBot = new TelegramBot(this);
+            session = tBot.registerBot(telegramBot);
         } catch (TelegramApiException e)
         {
             e.printStackTrace();

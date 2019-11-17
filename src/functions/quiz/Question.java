@@ -1,27 +1,31 @@
 package functions.quiz;
 
+import core.Message;
+
+import java.util.ArrayList;
 import java.util.Objects;
 
 public class Question
 {
-    public String question;
+    String question;
     public int id;
     private String answer;
+    public ArrayList<String> questionKeys;
 
-    public String getAnswer()
+    String getAnswer()
     {
         return answer;
     }
 
-    public Question(int id, String question, String answer)
+    Question(int id, String question, String answer)
     {
         this.question = question;
         this.answer = answer;
         this.id = id;
     }
 
-    public boolean isCorrect(String userAnswer)
+    boolean isCorrect(Message userAnswer)
     {
-        return Objects.equals(userAnswer.toLowerCase(), answer);
+        return Objects.equals(userAnswer.text.toLowerCase(), answer);
     }
 }

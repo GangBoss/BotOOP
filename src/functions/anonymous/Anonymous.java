@@ -12,25 +12,26 @@ import java.util.ArrayList;
 
 public class Anonymous extends BaseFunction
 {
-    private ArrayList<User> users = new ArrayList<>();
     private AnonymousCommandSet commands = new AnonymousCommandSet();
     private MessageHandler bot;
     public Searcher searcher;
+    private AnonymousButtons buttons;
 
 
     public Anonymous(MessageHandler bot)
     {
+        buttons=new AnonymousButtons();
         type = FunctionType.Anonymous;
         this.bot = bot;
         this.searcher = new Searcher(bot);
+
     }
 
     @Override
     public void start(User user)
     {
-        if (!users.contains(user)) users.add(user);
-        searcher.addUser(user);
-        sendMessage(new Message("Hello, you start anonymous. say /search to find chatmate users in db:" + users.size(), user));
+        if (!AnonymousDataBase.states.containsKey(user)) AnonymousDataBase.states.put(user, AnonymousState.Menu);
+        sendMessage(new Message("Hello, you start anonymous. say /search to find chatmate users in db:" + AnonymousDataBase.states.size(), user));
         user.state = FunctionType.Anonymous;
     }
 
@@ -40,6 +41,12 @@ public class Anonymous extends BaseFunction
         sendMessage(new Message("You are living anonymous chat", user));
         searcher.stop(user);
         user.state = FunctionType.None;
+    }
+
+    @Override
+    public ArrayList<String> getButtons(User user)
+    {
+        return buttons.getButtons(user);
     }
 
     @Override
