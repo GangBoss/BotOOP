@@ -12,8 +12,8 @@ Bot for oop practice
 
  - [x] Quiz
  - [x] AddButtons
- - [] Add messanges extends base message for all platforms
- - [] Add resending message in Anonimous chat
- - [] Add group chat Rpg
- - [] Add group chat quiz
- - [] Add admin mod for quiz rooms
+ - [ ] Add messanges extends base message for all platforms
+ - [ ] Add resending message in Anonimous chat
+ - [ ] Add group chat Rpg
+ - [ ] Add group chat quiz
+ - [ ] Add admin mod for quiz rooms
