@@ -21,10 +21,6 @@ public class GroupChat
         groups=new ArrayList<>();
         online=new HashMap<>();
     }
-    public void sendMessage(Message message)
-    {
-        bot.sendMessage(message);
-    }
 
     public void abandonGroup(User user)
     {
@@ -51,8 +47,9 @@ public class GroupChat
         }
         return  group;
     }
-    public void stop()
+    public Group getGroup(User user)
     {
+        return online.get(user);
 
     }
 

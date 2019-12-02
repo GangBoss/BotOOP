@@ -7,15 +7,15 @@ import core.User;
 
 public class StartCommand extends CommandBase
 {
-    public StartCommand()
+    StartCommand()
     {
         super("Get starting message");
     }
 
     @Override
-    public void execute(MessageHandler bot, User user)
+    public void execute(MessageHandler bot, Message message)
     {
-        bot.sendMessage(new Message("Hello, I'm a bot.", user));
-        bot.sendMessage(new Message("Enter \"/list\" to view all commands.", user));
+        bot.sendMessage(new Message("Hello, I'm a bot.", message.getUser()));
+        bot.sendMessage(new Message("Enter \"/list\" to view all commands.", message.getUser()));
     }
 }

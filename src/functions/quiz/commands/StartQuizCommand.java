@@ -5,17 +5,17 @@ import core.Message;
 import core.User;
 import functions.quiz.Quiz;
 
-public class NextQuizCommand extends CommandBase<Quiz>
+public class StartQuizCommand extends CommandBase<Quiz>
 {
-
-    NextQuizCommand()
+    public StartQuizCommand()
     {
-        super("Change question on Quiz");
+        super("Start Quiz");
     }
 
     @Override
     public void execute(Quiz bot, Message message)
     {
-        bot.next(message.getUser());
+        bot.askQuestion(message.getUser());
     }
 }
+

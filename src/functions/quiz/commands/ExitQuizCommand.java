@@ -1,19 +1,20 @@
 package functions.quiz.commands;
 
 import core.CommandBase;
+import core.Message;
 import core.User;
 import functions.quiz.Quiz;
 
 public class ExitQuizCommand extends CommandBase<Quiz>
 {
-    public ExitQuizCommand()
+    ExitQuizCommand()
     {
         super("Exit from quiz game");
     }
 
     @Override
-    public void execute(Quiz quiz, User user)
+    public void execute(Quiz quiz, Message message)
     {
-        quiz.stop(user);
+        quiz.stop(message.getUser());
     }
 }

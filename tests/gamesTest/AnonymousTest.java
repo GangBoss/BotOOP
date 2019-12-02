@@ -6,6 +6,7 @@ import core.User;
 import data.user.UserDatabase;
 import functions.FunctionType;
 import functions.anonymous.Anonymous;
+import functions.anonymous.AnonymousDataBase;
 import org.junit.Assert;
 import org.junit.Before;
 import org.junit.Test;
@@ -19,7 +20,7 @@ public class AnonymousTest
     private User<String> user2;
 
     @Before
-    public void setUp() throws Exception
+    public void setUp()
     {
         UserDatabase.clear();
         user1 = new User<>("user1", PlatformType.Console);
@@ -29,6 +30,8 @@ public class AnonymousTest
         tester = new TestMessageHandler();
         anonymous = new Anonymous(tester);
         tester.setTestedHandler(anonymous);
+        AnonymousDataBase.states.clear();
+
     }
 
     @Test

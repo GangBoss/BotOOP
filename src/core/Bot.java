@@ -8,7 +8,9 @@ import handlers.HandlerSet;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedDeque;
+import java.util.function.Function;
 
 public class Bot extends Runner implements MessageHandler
 {
@@ -17,12 +19,14 @@ public class Bot extends Runner implements MessageHandler
     private HandlerSet handlers;
     private FunctionSet games;
     private Thread handleThread;
+    private Thread timerThread;
 
     public Bot(boolean withUser) throws Exception
     {
         handlers = new HandlerSet(this, withUser);
         games = new FunctionSet(this);
         handleThread = new Thread(this::handleDeque);
+        timerThread = new Thread(this::update);
     }
 
     public void start()
@@ -32,6 +36,7 @@ public class Bot extends Runner implements MessageHandler
         isStopped = false;
         System.out.println("Starting...");
         handleThread.start();
+        timerThread.start();
         System.out.println("Started!");
         handlers.start();
     }
@@ -71,7 +76,7 @@ public class Bot extends Runner implements MessageHandler
     @Override
     public void sendMessage(Message message)
     {
-        message.buttons = getButtons(UserDatabase.getUser(message.id));
+        message.buttons = getButtons(Objects.requireNonNull(UserDatabase.getUser(message.id)));
         handlers.find(message.id.getUserPlatform()).sendMessage(message);
     }
 
@@ -89,7 +94,7 @@ public class Bot extends Runner implements MessageHandler
 
         else if (commands.hasItem(message.text))
         {
-            commands.find(message.text).execute(this, user);
+            commands.find(message.text).execute(this, message);
         } else sendMessage(new Message("Invalid command", message.id));
     }
 
@@ -109,6 +114,28 @@ public class Bot extends Runner implements MessageHandler
             }
             while (!messageQueue.isEmpty())
                 handleMessage(messageQueue.poll());
+
+        }
+    }
+
+    public void update()
+    {
+        while (!isStopped)
+        {
+            Function updatable = (r) ->
+            {
+                if (r instanceof Updatable)
+                    return true;
+                return false;
+            };
+            games.getAllInterface(updatable).forEach(r -> ((Updatable) r).update());
+            try
+            {
+                Thread.sleep(20000);
+            } catch (InterruptedException e)
+            {
+                e.printStackTrace();
+            }
         }
     }
 
@@ -118,7 +145,9 @@ public class Bot extends Runner implements MessageHandler
         if (user.state == FunctionType.None)
             return new ArrayList<>()
             {{
-                add("/start");
+                add("/quiz");
+                add("/anonymous");
+                add("/tribalwar");
                 add("/list");
             }};
         return games.find(user.state).getButtons(user);

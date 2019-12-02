@@ -16,11 +16,12 @@ class QuizButtons
             put(QuizState.Quiz, new ArrayList<>()
             {{
                 add("/next");
+                add("/list");
                 add("/exit");
             }});
             put(QuizState.MainMenu, new ArrayList<>()
             {{
-                add("/search");
+                add("/list");
                 add("/exit");
             }});
         }};
@@ -29,7 +30,7 @@ class QuizButtons
 
     ArrayList<String> getButtons(User user)
     {
-        if (buttons.containsKey(QuizDataBase.quizData.get(user).state))
+        if (!buttons.containsKey(QuizDataBase.quizData.get(user).state))
             return new ArrayList<>();
 
         return buttons.get(QuizDataBase.quizData.get(user).state);

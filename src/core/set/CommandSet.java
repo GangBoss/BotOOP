@@ -8,30 +8,30 @@ import java.util.HashMap;
 public class CommandSet extends BasicSet<String, CommandBase>
 {
     private int prefixCount;
-    private int suffixCount;
+    private int suffixLength;
     private String commandPrefix;
 
     private String commandList = "";
 
-    public CommandSet(int prefixCount, int suffixCount, String commandPrefix){
+    public CommandSet(int prefixCount, int suffixLength, String commandPrefix){
         set = new HashMap<>();
         this.commandPrefix = commandPrefix;
         add(new ListCommand(this), 7);
         this.prefixCount = prefixCount;
-        this.suffixCount = suffixCount;
+        this.suffixLength = suffixLength;
     }
 
     @Override
     protected void add(CommandBase item)
     {
-        add(item, suffixCount);
+        add(item, suffixLength);
     }
 
-    private void add(CommandBase item, int suffixCount)
+    private void add(CommandBase item, int suffixLength)
     {
         var result = new StringBuilder(commandList);
         var name = item.getClass().getSimpleName().toLowerCase();
-        name = commandPrefix + name.substring(prefixCount, name.length() - suffixCount);
+        name = commandPrefix + name.substring(prefixCount, name.length() - suffixLength);
         result.append(String.format("%s\t-\t%s\n",name,item.info ));
         commandList = result.toString();
         set.put(name, item);

@@ -2,19 +2,20 @@ package data.botCommands;
 
 import core.Bot;
 import core.CommandBase;
+import core.Message;
 import core.User;
 import functions.FunctionType;
 
 public class QuizCommand extends CommandBase<Bot>
 {
-    public QuizCommand()
+    QuizCommand()
     {
         super("Start playing quiz");
     }
 
     @Override
-    public void execute(Bot bot, User user)
+    public void execute(Bot bot, Message message)
     {
-        bot.startGame(user, FunctionType.Quiz);
+        bot.startGame(message.getUser(), FunctionType.Quiz);
     }
 }

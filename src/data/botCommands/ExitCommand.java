@@ -5,15 +5,16 @@ import core.*;
 public class ExitCommand extends CommandBase<Bot>
 {
 
-    public ExitCommand()
+    ExitCommand()
     {
         super("Exit from program.");
         includingPlatforms.add(PlatformType.Console);
     }
 
     @Override
-    public void execute(Bot bot, User user)
+    public void execute(Bot bot, Message message)
     {
+        var user = message.getUser();
         if (hasIncludingPlatform(user.getUserPlatform()))
             bot.sendMessage(new Message("Invalid command", user));
         else bot.stop();

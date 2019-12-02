@@ -10,14 +10,14 @@ import functions.groupChat.Group;
 import javax.swing.*;
 import java.util.*;
 
-public class Searcher
+public class AnonymousSearcher
 {
     private ArrayList<User> data = new ArrayList<>();
     private ArrayDeque<User> searchers;
     private GroupChat groupChat;
     private MessageHandler bot;
 
-    Searcher(MessageHandler bot)
+    AnonymousSearcher(MessageHandler bot)
     {
         this.bot = bot;
         this.groupChat = new GroupChat(bot);
@@ -36,23 +36,15 @@ public class Searcher
         bot.sendMessage(new Message("Now searching:" + searchers.size(), user));
     }
 
-
-    private void addPair(User first, User second)
-    {
-        bot.sendMessage(new Message("You find pair in a chat", first));
-        bot.sendMessage(new Message("You find pair in a chat", second));
-        AnonymousDataBase.states.put(first, AnonymousState.InPair);
-        AnonymousDataBase.states.put(second, AnonymousState.InPair);
-    }
-
     public void abandonChat(User user)
     {
         var userState = AnonymousDataBase.states.get(user);
         if (userState == AnonymousState.InPair)
         {
+            var group = groupChat.getGroup(user);
             groupChat.abandonGroup(user);
+            group.sendToGroup(new Message("Now you are alone in chat, you can use /abandonechat to live group", user));
             AnonymousDataBase.states.put(user, AnonymousState.Menu);
-            bot.sendMessage(new Message("You are not searching anymore", user));
         } else if (userState == AnonymousState.Searching)
         {
             bot.sendMessage(new Message("You are not searching anymore", user));
@@ -68,7 +60,7 @@ public class Searcher
         {
             searchers.push(user);
             AnonymousDataBase.states.put(user, AnonymousState.Searching);
-            bot.sendMessage(new Message("You are searching a pair  searchers:" + searchers.size(), user));
+            bot.sendMessage(new Message("You are searching a pair  searchers: " + searchers.size(), user));
             if (searchers.size() >= count)
             {
                 var group = getUserGroup(searchers, count);

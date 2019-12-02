@@ -1,20 +1,21 @@
 package functions.anonymous.commands;
 
 import core.CommandBase;
+import core.Message;
 import core.User;
 import functions.anonymous.Anonymous;
 
 public class SearchingAnonymousCommand extends CommandBase<Anonymous>
 {
 
-    public SearchingAnonymousCommand()
+    SearchingAnonymousCommand()
     {
         super("Show how many searchers online");
     }
 
     @Override
-    public void execute(Anonymous bot, User user)
+    public void execute(Anonymous bot, Message message)
     {
-        bot.searcher.searching(user);
+        bot.searcher.searching(message.getUser());
     }
 }

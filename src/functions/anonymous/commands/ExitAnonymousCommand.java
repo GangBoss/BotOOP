@@ -1,20 +1,21 @@
 package functions.anonymous.commands;
 
 import core.CommandBase;
+import core.Message;
 import core.User;
 import functions.anonymous.Anonymous;
 
 public class ExitAnonymousCommand extends CommandBase<Anonymous>
 {
-    public ExitAnonymousCommand()
+    ExitAnonymousCommand()
     {
         super("Exit from anonymous");
     }
 
     @Override
-    public void execute(Anonymous anonymous, User user)
+    public void execute(Anonymous anonymous, Message message)
     {
-        anonymous.stop(user);
+        anonymous.stop(message.getUser());
     }
 }
 

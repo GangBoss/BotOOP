@@ -6,12 +6,14 @@ import handlers.BaseHandler;
 import org.json.JSONObject;
 import org.telegram.telegrambots.bots.TelegramLongPollingBot;
 import org.telegram.telegrambots.meta.api.methods.send.SendMessage;
+import org.telegram.telegrambots.meta.api.methods.send.SendPhoto;
 import org.telegram.telegrambots.meta.api.objects.Message;
 import org.telegram.telegrambots.meta.api.objects.Update;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.ReplyKeyboardMarkup;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 import org.telegram.telegrambots.meta.exceptions.TelegramApiException;
 
+import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -23,6 +25,7 @@ public class TelegramBot extends TelegramLongPollingBot
     private BaseHandler handler;
     private String username;
     private String token;
+    private Message send;
 
     TelegramBot(BaseHandler handler)
     {
@@ -57,12 +60,28 @@ public class TelegramBot extends TelegramLongPollingBot
         SendMessage send = convertToSendMessage(message);
         try
         {
-            execute(send);
+           execute(send);
         } catch (TelegramApiException e)
         {
             System.out.println("Cant send message");
         }
+        if(message.hasPhoto()){
+            var path=message.getPhotoPath();
+            var photo=new File(path);
+            SendPhoto sendPhoto=new SendPhoto().setChatId((Long) message.id.getId()).setPhoto(photo);
+            try
+            {
+                execute(sendPhoto);
+            } catch (TelegramApiException e)
+            {
+                e.printStackTrace();
+            }
+        }
+
+
+
     }
+
 
     private SendMessage convertToSendMessage(core.Message message)
     {

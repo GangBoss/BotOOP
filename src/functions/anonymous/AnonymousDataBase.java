@@ -4,7 +4,7 @@ import core.User;
 
 import java.util.HashMap;
 
-abstract class AnonymousDataBase
+public abstract class AnonymousDataBase
 {
-    static HashMap<User, AnonymousState> states=new HashMap<>();
+    public static HashMap<User, AnonymousState> states=new HashMap<>();
 }

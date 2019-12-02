@@ -17,8 +17,8 @@ public class ListCommand extends CommandBase
     }
 
     @Override
-    public void execute(MessageHandler handler, User user)
+    public void execute(MessageHandler handler, Message message)
     {
-        handler.sendMessage(new Message(commands.getCommandList(), user));
+        handler.sendMessage(new Message(commands.getCommandList(), message.getUser()));
     }
 }

@@ -4,5 +4,6 @@ public enum FunctionType
 {
     Quiz,
     Anonymous,
+    TribalWar,
     None
 }

@@ -3,20 +3,19 @@ package data.botCommands;
 import core.Bot;
 import core.CommandBase;
 import core.Message;
-import core.User;
 import functions.FunctionType;
 
-public class
-AnonymousCommand extends CommandBase<Bot>
+public class TribalWarCommand extends CommandBase<Bot>
 {
-    AnonymousCommand()
+    TribalWarCommand()
     {
-        super("Start anonymous chat");
+        super("Start tribal war chat");
     }
 
     @Override
     public void execute(Bot bot, Message message)
     {
-        bot.startGame(message.getUser(), FunctionType.Anonymous);
+        bot.startGame(message.getUser(), FunctionType.TribalWar);
     }
 }
+

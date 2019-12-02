@@ -4,6 +4,7 @@ import core.Id;
 import core.Message;
 import core.MessageHandler;
 import core.User;
+
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -16,7 +17,7 @@ public class Group
 
     Group(MessageHandler bot, User[] users)
     {
-        this.users =new ArrayList<>(Arrays.asList(users));
+        this.users = new ArrayList<>(Arrays.asList(users));
         this.bot = bot;
     }
 
@@ -41,24 +42,29 @@ public class Group
     {
         users.remove(user);
         sendToGroup(new Message("User disconected", user));
-        if(users.size()==1)sendToGroup(new Message("Now You are alone in group but you can /abandonchat", user));
     }
 
     public void sendToGroup(Message message, boolean withCurrentUser)
     {
-        var currentUser=message.id;
+        var currentUser = message.id;
         users
                 // .stream()
                 // .filter(u -> isOnline(u)).collect(Collectors.toList())
                 .forEach(user ->
                 {
                     message.id = user.getFullId();
-                    if(withCurrentUser||!message.id.equals(currentUser))
-                    bot.sendMessage(message);
+                    if (withCurrentUser || !message.id.equals(currentUser))
+                        bot.sendMessage(message);
                 });
     }
-    void sendToGroup(Message message)
+
+    public void sendToGroup(Message message)
     {
-        sendToGroup(message,false);
+        sendToGroup(message, false);
+    }
+
+    int getCount(Message message)
+    {
+        return users.size();
     }
 }
