@@ -8,12 +8,13 @@ import handlers.BaseHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 
 
 public class GroupChat
 {
     private MessageHandler bot;
-    private ArrayList<Group> groups;
+    private List<Group> groups;
     private HashMap<User,Group> online;
 
     public GroupChat(MessageHandler bot){

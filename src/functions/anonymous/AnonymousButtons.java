@@ -3,45 +3,47 @@ package functions.anonymous;
 import core.User;
 
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 class AnonymousButtons
 {
-    private HashMap<AnonymousState, ArrayList<String>> buttons;
+    private HashMap<AnonymousState, List<String>> buttons;
+    private AnonymousDataBase dataBase;
 
-    AnonymousButtons()
+    public AnonymousButtons(AnonymousDataBase dataBase)
     {
+        this.dataBase = dataBase;
         buttons = new HashMap<>()
         {{
-            put(AnonymousState.InPair, new ArrayList<>()
-            {{
-                add("/exit");
-                add("/searching");
-                add("/abandonchat");
-            }});
-            put(AnonymousState.Menu, new ArrayList<>()
-            {{
-                add("/search");
-                add("/exit");
-                add("/searching");
-            }});
-            put(AnonymousState.Searching, new ArrayList<>()
-            {{
-
-                add("/searching");
-                add("/abandonchat");
-                add("/exit");
-            }});
+            put(AnonymousState.InPair, Arrays.asList(new String[]
+                    {
+                            "/exit",
+                            "/searching",
+                            "/abandonchat"
+                    }));
+            put(AnonymousState.Menu, Arrays.asList(new String[]
+                    {
+                            "/search",
+                            "/exit",
+                            "/searching"
+                    }));
+            put(AnonymousState.Searching, Arrays.asList(new String[]
+                    {"/searching",
+                            "/abandonchat",
+                            "/exit"
+                    }));
         }};
 
     }
 
-    ArrayList<String> getButtons(User user)
+    List<String> getButtons(User user)
     {
-        if (!buttons.containsKey(AnonymousDataBase.states.get(user)))
+        if (!buttons.containsKey(dataBase.states.get(user)))
             return new ArrayList<>();
 
-        return buttons.get(AnonymousDataBase.states.get(user));
+        return buttons.get(dataBase.states.get(user));
     }
 }
 

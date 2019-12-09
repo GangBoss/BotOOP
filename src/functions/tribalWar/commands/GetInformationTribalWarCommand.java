@@ -14,6 +14,6 @@ public class GetInformationTribalWarCommand extends CommandBase<TribalWar>
     @Override
     public void execute(TribalWar bot, Message message)
     {
-        bot.getInformation(message.getUser());
+        bot.sendInformation(message.getUser());
     }
 }

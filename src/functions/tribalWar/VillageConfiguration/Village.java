@@ -18,12 +18,6 @@ public class Village
         this.freeVill = this.vilagesCount;
     }
 
-
-    public void setDay(VillageDay villageDay)
-    {
-        this.day = villageDay;
-    }
-
     public synchronized EndDayInfo endDay(VillageDay day)
     {
         resourses.update(this.day, this.works, this);
@@ -38,14 +32,18 @@ public class Village
         return endDayInfo;
     }
 
-    public void hunt(int countVill)
+    public int hunt(int countVill)
     {
-        freeVill -= works.hunt(freeVill, countVill);
+        var sended=works.hunt(freeVill, countVill);
+        freeVill -= sended;
+        return  sended;
     }
 
-    public void chop(int countVill)
+    public int chop(int countVill)
     {
-        freeVill -= works.chop(freeVill, countVill);
+        var sended= works.chop(freeVill, countVill);
+        freeVill -=sended;
+        return sended;
     }
 
     int getVillagesCount()

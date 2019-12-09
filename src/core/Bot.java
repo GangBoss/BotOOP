@@ -5,12 +5,11 @@ import data.user.UserDatabase;
 import functions.FunctionSet;
 import functions.FunctionType;
 import handlers.HandlerSet;
-
-import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
-import java.util.Objects;
 import java.util.concurrent.ConcurrentLinkedDeque;
 import java.util.function.Function;
+
 
 public class Bot extends Runner implements MessageHandler
 {
@@ -76,7 +75,9 @@ public class Bot extends Runner implements MessageHandler
     @Override
     public void sendMessage(Message message)
     {
-        message.buttons = getButtons(Objects.requireNonNull(UserDatabase.getUser(message.id)));
+        var user = message.getUser();
+        if (user.state == FunctionType.None)
+            message.buttons = getButtons(user);
         handlers.find(message.id.getUserPlatform()).sendMessage(message);
     }
 
@@ -128,10 +129,10 @@ public class Bot extends Runner implements MessageHandler
                     return true;
                 return false;
             };
-            games.getAllInterface(updatable).forEach(r -> ((Updatable) r).update());
+            games.getAll(updatable).forEach(r -> ((Updatable) r).update());
             try
             {
-                Thread.sleep(20000);
+                Thread.sleep(60000);
             } catch (InterruptedException e)
             {
                 e.printStackTrace();
@@ -139,18 +140,15 @@ public class Bot extends Runner implements MessageHandler
         }
     }
 
-    private ArrayList<String> getButtons(User user)
+    private List<String> getButtons(User user)
     {
-
-        if (user.state == FunctionType.None)
-            return new ArrayList<>()
-            {{
-                add("/quiz");
-                add("/anonymous");
-                add("/tribalwar");
-                add("/list");
-            }};
-        return games.find(user.state).getButtons(user);
+        return Arrays.asList(new String[]
+                {
+                        "/quiz",
+                        "/anonymous",
+                        "/tribalwar",
+                        "/list"
+                });
     }
 }
 

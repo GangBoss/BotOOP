@@ -15,6 +15,7 @@ public class ChopTribalWarCommand extends CommandBase<TribalWar>
     @Override
     public void execute(TribalWar bot, Message message)
     {
-         bot.chop(message);
+        var param=getNumericParam(message.text);
+         bot.chop(message.getUser(),param);
     }
 }

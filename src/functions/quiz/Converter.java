@@ -4,12 +4,13 @@ import java.nio.charset.Charset;
 import java.nio.file.Files;
 import java.nio.file.Paths;
 import java.util.ArrayList;
+import java.util.List;
 
 public final class Converter
 {
     private static String firstPackage = System.getProperty("user.dir") + "\\res\\QuizQuestions.txt";
 
-    public static ArrayList<Question> getQuestions(String path) throws Exception
+    public static List<Question> getQuestions(String path) throws Exception
     {
         {
             var quests = new ArrayList<Question>();
@@ -25,7 +26,7 @@ public final class Converter
         }
     }
 
-    public static ArrayList<Question> getQuestions() throws Exception
+    public static List<Question> getQuestions() throws Exception
     {
         return getQuestions(firstPackage);
     }

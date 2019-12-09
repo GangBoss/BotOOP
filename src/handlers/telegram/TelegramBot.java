@@ -91,7 +91,7 @@ public class TelegramBot extends TelegramLongPollingBot
             send.setChatId((Long) message.id.getId());
             if (message.hasText())
                 send.setText(message.text);
-            if (!(message.buttons.isEmpty()))
+            if (message.hasButtons())
             {
                 var markup = new ReplyKeyboardMarkup();
                 markup.setResizeKeyboard(true);

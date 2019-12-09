@@ -17,4 +17,17 @@ public abstract class CommandBase<T extends MessageHandler> implements Command<T
     {
         this.info = info;
     }
+
+    public Integer getNumericParam(String messageText)
+    {
+        var text = messageText.split(" ");
+        try
+        {
+            return Integer.parseInt(text[1]);
+
+        } catch (Exception e)
+        {
+            return null;
+        }
+    }
 }

@@ -2,8 +2,6 @@ package functions.tribalWar.commands;
 
 import core.CommandBase;
 import core.Message;
-import core.MessageHandler;
-import functions.tribalWar.Room;
 import functions.tribalWar.TribalWar;
 
 public class ExitTribalWarCommand extends CommandBase<TribalWar>

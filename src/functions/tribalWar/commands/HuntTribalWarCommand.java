@@ -15,6 +15,7 @@ public class HuntTribalWarCommand extends CommandBase<TribalWar>
     @Override
     public void execute(TribalWar bot, Message message)
     {
-            bot.hunt(message);
+        var param=getNumericParam(message.text);
+        bot.hunt(message.getUser(),param);
     }
 }

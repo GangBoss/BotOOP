@@ -2,31 +2,36 @@ package functions.tribalWar;
 
 import core.User;
 
+import java.lang.reflect.Array;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.HashMap;
+import java.util.List;
 
 
 class TribalWarButtons
 {
-    private final HashMap<TribalWarState, ArrayList<String>> buttons;
+    private final HashMap<TribalWarState, List<String>> buttons;
+    private TribalWarDataBase dataBase;
 
-    TribalWarButtons()
+    TribalWarButtons(TribalWarDataBase dataBase)
     {
+        this.dataBase = dataBase;
         buttons = new HashMap<>()
         {{
-            put(TribalWarState.Playing, new ArrayList<>()
-            {{
-                add("/chop 1");
-                add("/hunt 1");
-                add("/getInformation");
-                add("/exit");
-            }});
+            put(TribalWarState.Playing, Arrays.asList(
+                    new String[]{
+                            "/chop 1",
+                            "/hunt 1",
+                            "/getInformation",
+                            "/exit"
+                    }));
         }};
     }
 
-    ArrayList<String> getButtons(User user)
+    List<String> getButtons(User user)
     {
-        var userState = TribalWarDataBase.get(user).state;
+        var userState = dataBase.get(user).state;
         if (!buttons.containsKey(userState))
             return new ArrayList<>();
         return buttons.get(userState);

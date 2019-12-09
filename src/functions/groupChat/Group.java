@@ -7,13 +7,14 @@ import core.User;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 import static java.util.Arrays.asList;
 
 public class Group
 {
     MessageHandler bot;
-    private ArrayList<User> users;
+    private List<User> users;
 
     Group(MessageHandler bot, User[] users)
     {
@@ -28,7 +29,7 @@ public class Group
         sendToGroup(new Message("New user now in chat", user));
     }
 
-    public ArrayList<User> getUsers()
+    public List<User> getUsers()
     {
         return users;
     }
@@ -44,23 +45,21 @@ public class Group
         sendToGroup(new Message("User disconected", user));
     }
 
-    public void sendToGroup(Message message, boolean withCurrentUser)
-    {
-        var currentUser = message.id;
-        users
-                // .stream()
-                // .filter(u -> isOnline(u)).collect(Collectors.toList())
-                .forEach(user ->
-                {
-                    message.id = user.getFullId();
-                    if (withCurrentUser || !message.id.equals(currentUser))
-                        bot.sendMessage(message);
-                });
-    }
-
     public void sendToGroup(Message message)
     {
-        sendToGroup(message, false);
+        var currentUser = message.id;
+        users.forEach(user ->
+        {
+            message.id = user.getFullId();
+            if ( !message.id.equals(currentUser))
+                bot.sendMessage(message);
+        });
+    }
+
+    public void sendToAllGroup(Message message)
+    {
+        bot.sendMessage(message);
+        sendToGroup(message);
     }
 
     int getCount(Message message)

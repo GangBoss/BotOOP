@@ -12,23 +12,26 @@ import java.util.*;
 
 public class AnonymousSearcher
 {
-    private ArrayList<User> data = new ArrayList<>();
-    private ArrayDeque<User> searchers;
+    private List<User> data = new ArrayList<>();
+    private Deque<User> searchers;
     private GroupChat groupChat;
     private MessageHandler bot;
+    private AnonymousDataBase dataBase;
+    private final int count = 2;
 
-    AnonymousSearcher(MessageHandler bot)
+    AnonymousSearcher(MessageHandler bot, AnonymousDataBase dataBase)
     {
         this.bot = bot;
         this.groupChat = new GroupChat(bot);
         this.searchers = new ArrayDeque<>();
+        this.dataBase=dataBase;
     }
 
     public void stop(User user)
     {
         searchers.remove(user);
         abandonChat(user);
-        AnonymousDataBase.states.remove(user);
+        dataBase.states.remove(user);
     }
 
     public void searching(User user)
@@ -38,13 +41,13 @@ public class AnonymousSearcher
 
     public void abandonChat(User user)
     {
-        var userState = AnonymousDataBase.states.get(user);
+        var userState = dataBase.states.get(user);
         if (userState == AnonymousState.InPair)
         {
             var group = groupChat.getGroup(user);
             groupChat.abandonGroup(user);
             group.sendToGroup(new Message("Now you are alone in chat, you can use /abandonechat to live group", user));
-            AnonymousDataBase.states.put(user, AnonymousState.Menu);
+            dataBase.states.put(user, AnonymousState.Menu);
         } else if (userState == AnonymousState.Searching)
         {
             bot.sendMessage(new Message("You are not searching anymore", user));
@@ -54,29 +57,29 @@ public class AnonymousSearcher
 
     public void search(User user)
     {
-        var count = 2;
-        var userState = AnonymousDataBase.states.get(user);
+
+        var userState = dataBase.states.get(user);
         if (userState == AnonymousState.Menu)
         {
             searchers.push(user);
-            AnonymousDataBase.states.put(user, AnonymousState.Searching);
+            dataBase.states.put(user, AnonymousState.Searching);
             bot.sendMessage(new Message("You are searching a pair  searchers: " + searchers.size(), user));
             if (searchers.size() >= count)
             {
                 var group = getUserGroup(searchers, count);
                 for (var u:group)
                 {
-                    AnonymousDataBase.states.put(u, AnonymousState.InPair);
+                    dataBase.states.put(u, AnonymousState.InPair);
                 }
 
                var curGroup= groupChat.addGroup(group);
-                curGroup.sendToGroup(new Message("You find pair in a chat",user),true);
+                curGroup.sendToAllGroup(new Message("You find pair in a chat",user));
             }
         } else
             bot.sendMessage(new Message("You already in pair or searching:", user));
     }
 
-    private User[] getUserGroup(ArrayDeque<User> searchers, int count)
+    private User[] getUserGroup(Deque<User> searchers, int count)
     {
         User[] users = new User[count];
         for (var i = 0; i < count; i++)
@@ -88,7 +91,7 @@ public class AnonymousSearcher
     public void handleMessage(Message message)
     {
         var user = UserDatabase.getUser(message.id);
-        var userState = AnonymousDataBase.states.get(user);
+        var userState = dataBase.states.get(user);
 
         if (userState == AnonymousState.InPair)
             groupChat.handleMessage(message);

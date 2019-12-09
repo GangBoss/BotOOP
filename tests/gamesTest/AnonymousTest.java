@@ -30,7 +30,7 @@ public class AnonymousTest
         tester = new TestMessageHandler();
         anonymous = new Anonymous(tester);
         tester.setTestedHandler(anonymous);
-        AnonymousDataBase.states.clear();
+       // AnonymousDataBase.states.clear();
 
     }
 

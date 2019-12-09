@@ -9,20 +9,23 @@ import functions.FunctionType;
 import functions.anonymous.commands.AnonymousCommandSet;
 
 import java.util.ArrayList;
+import java.util.List;
 
 public class Anonymous extends BaseFunction
 {
     private AnonymousCommandSet commands = new AnonymousCommandSet();
-    private MessageHandler bot;
     public AnonymousSearcher searcher;
     private AnonymousButtons buttons;
+    private AnonymousDataBase dataBase;
 
     public Anonymous(MessageHandler bot)
     {
-        buttons = new AnonymousButtons();
+        dataBase=new AnonymousDataBase();
         type = FunctionType.Anonymous;
         this.bot = bot;
-        this.searcher = new AnonymousSearcher(bot);
+        buttons = new AnonymousButtons(dataBase);
+        this.searcher = new AnonymousSearcher(bot,dataBase);
+
 
     }
 
@@ -30,8 +33,8 @@ public class Anonymous extends BaseFunction
     public void start(User user)
     {
         user.state = FunctionType.Anonymous;
-        if (!AnonymousDataBase.states.containsKey(user)) AnonymousDataBase.states.put(user, AnonymousState.Menu);
-        sendMessage(new Message("Hello, you start anonymous. say /search to find chatmate users in db:" + AnonymousDataBase.states.size(), user));
+        if (!dataBase.states.containsKey(user)) dataBase.states.put(user, AnonymousState.Menu);
+        sendMessage(new Message("Hello, you start anonymous. say /search to find chatmate users in db:" + dataBase.states.size(), user));
     }
 
     @Override
@@ -43,15 +46,9 @@ public class Anonymous extends BaseFunction
     }
 
     @Override
-    public ArrayList<String> getButtons(User user)
+    public List<String> getButtons(User user)
     {
         return buttons.getButtons(user);
-    }
-
-    @Override
-    public void sendMessage(Message message)
-    {
-        bot.sendMessage(message);
     }
 
     @Override

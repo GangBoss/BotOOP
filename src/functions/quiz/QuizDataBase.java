@@ -7,8 +7,8 @@ import java.util.HashMap;
 
 class QuizDataBase
 {
-    static HashMap<User, QuizData> quizData = new HashMap<>();
-    static void ChangeState(User user, QuizState quizState){
+     HashMap<User, QuizData> quizData = new HashMap<>();
+     void ChangeState(User user, QuizState quizState){
         var currentData=quizData.get(user);
         currentData.state=quizState;
     }

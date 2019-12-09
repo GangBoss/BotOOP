@@ -9,40 +9,41 @@ import functions.BaseFunction;
 import functions.FunctionType;
 import functions.tribalWar.VillageConfiguration.Village;
 import functions.tribalWar.VillageConfiguration.VillageDay;
-import functions.tribalWar.VillageConfiguration.VillageState;
 import functions.tribalWar.commands.TribalWarCommandSet;
 
-import java.util.ArrayList;
+import java.util.List;
 import java.util.Random;
 
 public class TribalWar extends BaseFunction implements Updatable
 {
     private TribalWarCommandSet commands = new TribalWarCommandSet();
-    private MessageHandler bot;
-    // public TribalWarSearcher searcher;
     private TribalWarButtons buttons;
+    private TribalWarDataBase dataBase;
+    private Random random;
 
     public TribalWar(MessageHandler bot)
     {
-        buttons = new TribalWarButtons();
-        type = FunctionType.TribalWar;
+        random = new Random();
         this.bot = bot;
-        // this.searcher = new TribalWarSearcher(bot);
-
+        dataBase = new TribalWarDataBase();
+        buttons = new TribalWarButtons(dataBase);
+        type = FunctionType.TribalWar;
     }
 
     @Override
     public void start(User user)
     {
         user.state = type;
-        if (!TribalWarDataBase.containsKey(user))
+        if (!dataBase.containsKey(user))
         {
-            var village = new Village(VillageDay.getNewDay(new Random()), Village.startVillages);
+            var village = new Village(VillageDay.getNewDay(random), Village.startVillages);
             var data = new TribalWarData(village, TribalWarState.Playing);
-            TribalWarDataBase.put(user, data);
+            dataBase.put(user, data);
         }
-        var openMess=new Message("Hello, you start tribalWar. say /getInformation ", user);
-        openMess.setPhotoPath("F:\\screen-2.jpg");
+        var openMess = new Message("Hello, you start tribalWar. say /getInformation ", user);
+
+        openMess.setPhotoPath(getPathToRes() + "openScreen.jpg");
+
         sendMessage(openMess);
     }
 
@@ -54,28 +55,23 @@ public class TribalWar extends BaseFunction implements Updatable
     }
 
     @Override
-    public ArrayList<String> getButtons(User user)
+    public List<String> getButtons(User user)
     {
         return buttons.getButtons(user);
     }
 
     @Override
-    public void sendMessage(Message message)
-    {
-        bot.sendMessage(message);
-    }
-
-    @Override
     public synchronized void update()
     {
-        var day = VillageDay.getNewDay(new Random());
-        for (var element : TribalWarDataBase.data.values())
+        var day = VillageDay.getNewDay(random);
+        for (var element : dataBase.data.values())
         {
             element.village.endDay(day);
         }
-        for (var user : TribalWarDataBase.data.keySet())
+        for (var user : dataBase.data.keySet())
         {
-            getInformation(user);
+            if (UserDatabase.getUser(user).state == FunctionType.TribalWar)
+                sendInformation(user);
         }
     }
 
@@ -94,53 +90,42 @@ public class TribalWar extends BaseFunction implements Updatable
         bot.sendMessage(new Message("Invalid command", message.getUser()));
     }
 
-    public void hunt(Message message)
+    public void hunt(User user, Integer param)
     {
-        var data = TribalWarDataBase.get(message.getUser());
-        var param = getNumericParam(message.text);
-        if (param == 0)
-            bot.sendMessage(new Message("add parametr to the command", message.getUser()));
+        var data = dataBase.get(user);
+
+        if (param == null || param <= 0)
+            bot.sendMessage(new Message("add parametr that bigger than zero to the command", user));
         else
         {
-            data.village.hunt(param);
-            bot.sendMessage(new Message("Some of your villages were send to hunt", message.getUser()));
+            var sended = data.village.hunt(param);
+            bot.sendMessage(new Message(sended + " of your villages were send to hunt", user));
         }
     }
 
-    public void getInformation(User user)
+    public void sendInformation(User user)
     {
-        var data = TribalWarDataBase.get(user);
+        var data = dataBase.get(user);
         var text = data.village.getInformation();
-        bot.sendMessage(  new Message(text, user));
+        bot.sendMessage(new Message(text, user));
     }
 
-    public void chop(Message message)
+    public void chop(User user, Integer param)
     {
-        var data = TribalWarDataBase.get(message.getUser());
-        var param = getNumericParam(message.text);
-        if (param == 0)
-            bot.sendMessage(new Message("add parametr to the command", message.getUser()));
+        var data = dataBase.get(user);
+
+        if (param == null || param <= 0)
+            bot.sendMessage(new Message("add parametr that bigger than zero to the command", user));
         else
         {
-            data.village.chop(param);
-            bot.sendMessage(new Message("Some of your villages were send to chop", message.getUser()));
+            var sended = data.village.chop(param);
+            bot.sendMessage(new Message(sended + " of your villages were send to chop", user));
         }
 
     }
 
-    private int getNumericParam(String messageText)
+    private String getPathToRes()
     {
-        var text = messageText.split(" ");
-        try
-        {
-            return Integer.parseInt(text[1]);
-
-        } catch (Exception e)
-        {
-            return 0;
-        }
+        return System.getProperty("user.dir") + "\\res\\";
     }
-    //Find room
-    //start solo
-    // info
 }
