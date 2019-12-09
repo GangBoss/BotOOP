@@ -30,7 +30,7 @@ public class Quiz extends BaseFunction
         this.bot = bot;
         buttons = new QuizButtons(dataBase);
     }
-
+//gg
     @Override
     public void start(User user)
     {
