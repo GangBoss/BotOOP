@@ -2,13 +2,15 @@ package core;
 
 import data.botCommands.BotCommandSet;
 import data.user.UserDatabase;
+import functions.BaseFunction;
 import functions.FunctionSet;
 import functions.FunctionType;
 import handlers.HandlerSet;
+
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.function.Function;
+import java.util.function.Predicate;
 
 
 public class Bot extends Runner implements MessageHandler
@@ -77,7 +79,7 @@ public class Bot extends Runner implements MessageHandler
     {
         var user = message.getUser();
         if (user.state == FunctionType.None)
-            message.buttons = getButtons(user);
+            message.buttons = getDefaultButtons(user);
         handlers.find(message.id.getUserPlatform()).sendMessage(message);
     }
 
@@ -119,17 +121,14 @@ public class Bot extends Runner implements MessageHandler
         }
     }
 
-    public void update()
+    private void update()
     {
         while (!isStopped)
         {
-            Function updatable = (r) ->
-            {
-                if (r instanceof Updatable)
-                    return true;
-                return false;
-            };
-            games.getAll(updatable).forEach(r -> ((Updatable) r).update());
+            games.getAll()
+                    .filter(r-> r instanceof Updatable)
+                    .map(r -> ((Updatable) r))
+                    .forEach(Updatable::update);
             try
             {
                 Thread.sleep(60000);
@@ -140,15 +139,13 @@ public class Bot extends Runner implements MessageHandler
         }
     }
 
-    private List<String> getButtons(User user)
+    private List<String> getDefaultButtons(User user)
     {
-        return Arrays.asList(new String[]
-                {
-                        "/quiz",
-                        "/anonymous",
-                        "/tribalwar",
-                        "/list"
-                });
+        return Arrays.asList(
+                "/quiz",
+                "/anonymous",
+                "/tribalwar",
+                "/list");
     }
 }
 

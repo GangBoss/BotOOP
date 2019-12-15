@@ -1,5 +1,6 @@
 package functions.tribalWar;
 
+import core.DataBase;
 import core.User;
 
 import java.lang.reflect.Array;
@@ -12,20 +13,19 @@ import java.util.List;
 class TribalWarButtons
 {
     private final HashMap<TribalWarState, List<String>> buttons;
-    private TribalWarDataBase dataBase;
+    private DataBase<TribalWarData> dataBase;
 
-    TribalWarButtons(TribalWarDataBase dataBase)
+    TribalWarButtons(DataBase<TribalWarData> dataBase)
     {
         this.dataBase = dataBase;
         buttons = new HashMap<>()
         {{
             put(TribalWarState.Playing, Arrays.asList(
-                    new String[]{
-                            "/chop 1",
-                            "/hunt 1",
-                            "/getInformation",
-                            "/exit"
-                    }));
+                    "/chop 1",
+                    "/hunt 1",
+                    "/getInformation",
+                    "/exit"
+            ));
         }};
     }
 

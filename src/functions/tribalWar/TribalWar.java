@@ -1,9 +1,6 @@
 package functions.tribalWar;
 
-import core.Message;
-import core.MessageHandler;
-import core.Updatable;
-import core.User;
+import core.*;
 import data.user.UserDatabase;
 import functions.BaseFunction;
 import functions.FunctionType;
@@ -18,14 +15,14 @@ public class TribalWar extends BaseFunction implements Updatable
 {
     private TribalWarCommandSet commands = new TribalWarCommandSet();
     private TribalWarButtons buttons;
-    private TribalWarDataBase dataBase;
+    private DataBase<TribalWarData> dataBase;
     private Random random;
 
     public TribalWar(MessageHandler bot)
     {
         random = new Random();
         this.bot = bot;
-        dataBase = new TribalWarDataBase();
+        dataBase = new DataBase<>();
         buttons = new TribalWarButtons(dataBase);
         type = FunctionType.TribalWar;
     }
@@ -64,15 +61,15 @@ public class TribalWar extends BaseFunction implements Updatable
     public synchronized void update()
     {
         var day = VillageDay.getNewDay(random);
-        for (var element : dataBase.data.values())
-        {
-            element.village.endDay(day);
-        }
-        for (var user : dataBase.data.keySet())
-        {
-            if (UserDatabase.getUser(user).state == FunctionType.TribalWar)
-                sendInformation(user);
-        }
+        dataBase.getAll().forEach(element ->
+                {
+                    element.getValue().village.endDay(day);
+                    var user = element.getKey();
+                    if (UserDatabase.getUser(user).state == FunctionType.TribalWar)
+                        sendInformation(user);
+                }
+
+        );
     }
 
     @Override

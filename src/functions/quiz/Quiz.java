@@ -1,5 +1,6 @@
 package functions.quiz;
 
+import core.DataBase;
 import core.Message;
 import core.MessageHandler;
 import core.User;
@@ -18,26 +19,26 @@ public class Quiz extends BaseFunction
     private HashMap<Integer, Question> questions = new HashMap<>();
     private QuizCommandSet commands = new QuizCommandSet();
     private QuizButtons buttons;
-    private QuizDataBase dataBase;
+    private DataBase<QuizData> dataBase;
 
     public Quiz(MessageHandler bot) throws Exception
     {
         type = FunctionType.Quiz;
-        dataBase = new QuizDataBase();
+        dataBase = new DataBase<>();
         var questions = Converter.getQuestions();
         for (var question : questions)
             this.questions.put(question.id, question);
         this.bot = bot;
         buttons = new QuizButtons(dataBase);
     }
-//gg
+
     @Override
     public void start(User user)
     {
         user.state = FunctionType.Quiz;
-        if (!dataBase.quizData.containsKey(user))
-            dataBase.quizData.put(user, new QuizData());
-        dataBase.ChangeState(user, QuizState.Quiz);
+        if (!dataBase.containsKey(user))
+            dataBase.put(user, new QuizData());
+        dataBase.update(user, data->data.state=QuizState.Quiz);
         sendMessage(new Message("Hello, you start quiz game.  If you want exit from quiz type /exit", user));
         askQuestion(user);
     }
@@ -47,7 +48,7 @@ public class Quiz extends BaseFunction
     {
         user.state = FunctionType.None;
         sendMessage(new Message("You are living quiz", user));
-        dataBase.quizData.remove(user);
+        dataBase.remove(user);
     }
 
     @Override
@@ -63,9 +64,9 @@ public class Quiz extends BaseFunction
         if (commands.hasItem(message.text))
         {
             commands.find(message.text).execute(this, message);
-        } else if (questions.get(dataBase.quizData.get(user).currentQuestionId).isCorrect(message))
+        } else if (questions.get(dataBase.get(user).currentQuestionId).isCorrect(message))
         {
-            var quizData = dataBase.quizData.get(user);
+            var quizData = dataBase.get(user);
             quizData.rightAnswers++;
             sendMessage(new Message("Правильно", message.id));
             askQuestion(user);
@@ -77,7 +78,7 @@ public class Quiz extends BaseFunction
 
     public void next(User user)
     {
-        var quizData = dataBase.quizData.get(user);
+        var quizData = dataBase.get(user);
         var currentAnswer = questions.get(quizData.currentQuestionId).getAnswer();
         sendMessage(new Message("Right: " + currentAnswer, user));
         sendMessage(new Message("Go next", user));
@@ -93,7 +94,7 @@ public class Quiz extends BaseFunction
 
     public void askQuestion(User user)
     {
-        var quizData = dataBase.quizData.get(user);
+        var quizData = dataBase.get(user);
         quizData.currentQuestionId = getRandomQuestionId();
         sendMessage(new Message(questions.get(quizData.currentQuestionId).question, user));
     }

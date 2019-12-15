@@ -1,5 +1,6 @@
 package functions.anonymous;
 
+import core.DataBase;
 import core.Message;
 import core.MessageHandler;
 import core.User;
@@ -16,11 +17,11 @@ public class Anonymous extends BaseFunction
     private AnonymousCommandSet commands = new AnonymousCommandSet();
     public AnonymousSearcher searcher;
     private AnonymousButtons buttons;
-    private AnonymousDataBase dataBase;
+    private DataBase<AnonymousState> dataBase;
 
     public Anonymous(MessageHandler bot)
     {
-        dataBase=new AnonymousDataBase();
+        dataBase=new DataBase<>();
         type = FunctionType.Anonymous;
         this.bot = bot;
         buttons = new AnonymousButtons(dataBase);
@@ -33,8 +34,8 @@ public class Anonymous extends BaseFunction
     public void start(User user)
     {
         user.state = FunctionType.Anonymous;
-        if (!dataBase.states.containsKey(user)) dataBase.states.put(user, AnonymousState.Menu);
-        sendMessage(new Message("Hello, you start anonymous. say /search to find chatmate users in db:" + dataBase.states.size(), user));
+        if (!dataBase.containsKey(user)) dataBase.put(user, AnonymousState.Menu);
+        sendMessage(new Message("Hello, you start anonymous. say /search to find chatmate users in db:" + dataBase.count(), user));
     }
 
     @Override

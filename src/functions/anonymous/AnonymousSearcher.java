@@ -1,5 +1,6 @@
 package functions.anonymous;
 
+import core.DataBase;
 import core.Message;
 import core.MessageHandler;
 import core.User;
@@ -16,10 +17,10 @@ public class AnonymousSearcher
     private Deque<User> searchers;
     private GroupChat groupChat;
     private MessageHandler bot;
-    private AnonymousDataBase dataBase;
+    private DataBase<AnonymousState> dataBase;
     private final int count = 2;
 
-    AnonymousSearcher(MessageHandler bot, AnonymousDataBase dataBase)
+    AnonymousSearcher(MessageHandler bot, DataBase<AnonymousState> dataBase)
     {
         this.bot = bot;
         this.groupChat = new GroupChat(bot);
@@ -31,7 +32,7 @@ public class AnonymousSearcher
     {
         searchers.remove(user);
         abandonChat(user);
-        dataBase.states.remove(user);
+        dataBase.remove(user);
     }
 
     public void searching(User user)
@@ -41,13 +42,13 @@ public class AnonymousSearcher
 
     public void abandonChat(User user)
     {
-        var userState = dataBase.states.get(user);
+        var userState = dataBase.get(user);
         if (userState == AnonymousState.InPair)
         {
             var group = groupChat.getGroup(user);
             groupChat.abandonGroup(user);
             group.sendToGroup(new Message("Now you are alone in chat, you can use /abandonechat to live group", user));
-            dataBase.states.put(user, AnonymousState.Menu);
+            dataBase.put(user, AnonymousState.Menu);
         } else if (userState == AnonymousState.Searching)
         {
             bot.sendMessage(new Message("You are not searching anymore", user));
@@ -58,18 +59,18 @@ public class AnonymousSearcher
     public void search(User user)
     {
 
-        var userState = dataBase.states.get(user);
+        var userState = dataBase.get(user);
         if (userState == AnonymousState.Menu)
         {
             searchers.push(user);
-            dataBase.states.put(user, AnonymousState.Searching);
+            dataBase.put(user, AnonymousState.Searching);
             bot.sendMessage(new Message("You are searching a pair  searchers: " + searchers.size(), user));
             if (searchers.size() >= count)
             {
                 var group = getUserGroup(searchers, count);
                 for (var u:group)
                 {
-                    dataBase.states.put(u, AnonymousState.InPair);
+                    dataBase.put(u, AnonymousState.InPair);
                 }
 
                var curGroup= groupChat.addGroup(group);
@@ -91,7 +92,7 @@ public class AnonymousSearcher
     public void handleMessage(Message message)
     {
         var user = UserDatabase.getUser(message.id);
-        var userState = dataBase.states.get(user);
+        var userState = dataBase.get(user);
 
         if (userState == AnonymousState.InPair)
             groupChat.handleMessage(message);

@@ -1,5 +1,6 @@
 package functions.anonymous;
 
+import core.DataBase;
 import core.User;
 
 import java.util.ArrayList;
@@ -10,40 +11,37 @@ import java.util.List;
 class AnonymousButtons
 {
     private HashMap<AnonymousState, List<String>> buttons;
-    private AnonymousDataBase dataBase;
+    private DataBase<AnonymousState> dataBase;
 
-    public AnonymousButtons(AnonymousDataBase dataBase)
+    AnonymousButtons(DataBase<AnonymousState> dataBase)
     {
         this.dataBase = dataBase;
         buttons = new HashMap<>()
         {{
-            put(AnonymousState.InPair, Arrays.asList(new String[]
-                    {
-                            "/exit",
-                            "/searching",
-                            "/abandonchat"
-                    }));
-            put(AnonymousState.Menu, Arrays.asList(new String[]
-                    {
-                            "/search",
-                            "/exit",
-                            "/searching"
-                    }));
-            put(AnonymousState.Searching, Arrays.asList(new String[]
-                    {"/searching",
-                            "/abandonchat",
-                            "/exit"
-                    }));
+            put(AnonymousState.InPair, Arrays.asList(
+                    "/exit",
+                    "/searching",
+                    "/abandonchat"
+            ));
+            put(AnonymousState.Menu, Arrays.asList(
+                    "/search",
+                    "/exit",
+                    "/searching"
+            ));
+            put(AnonymousState.Searching, Arrays.asList("/searching",
+                    "/abandonchat",
+                    "/exit"
+            ));
         }};
 
     }
 
     List<String> getButtons(User user)
     {
-        if (!buttons.containsKey(dataBase.states.get(user)))
+        if (!buttons.containsKey(dataBase.get(user)))
             return new ArrayList<>();
 
-        return buttons.get(dataBase.states.get(user));
+        return buttons.get(dataBase.get(user));
     }
 }
 

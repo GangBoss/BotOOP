@@ -1,5 +1,6 @@
 package functions.quiz;
 
+import core.DataBase;
 import core.User;
 
 import java.util.ArrayList;
@@ -11,31 +12,31 @@ class QuizButtons
 {
     private HashMap<QuizState, List<String>> buttons;
 
-    QuizDataBase dataBase;
+    private DataBase<QuizData> dataBase;
 
-    QuizButtons(QuizDataBase dataBase)
+    QuizButtons(DataBase<QuizData> dataBase)
     {
         this.dataBase = dataBase;
         buttons = new HashMap<>()
         {{
-            put(QuizState.Quiz, Arrays.asList(new String[]{
+            put(QuizState.Quiz, Arrays.asList(
                     "/next",
                     "/list",
                     "/exit"
-            }));
-            put(QuizState.MainMenu, Arrays.asList(new String[]{
+            ));
+            put(QuizState.MainMenu, Arrays.asList(
                     "/list",
                     "/exit"
-            }));
+            ));
         }};
 
     }
 
     List<String> getButtons(User user)
     {
-        if (!buttons.containsKey(dataBase.quizData.get(user).state))
+        if (!buttons.containsKey(dataBase.get(user).state))
             return new ArrayList<>();
 
-        return buttons.get(dataBase.quizData.get(user).state);
+        return buttons.get(dataBase.get(user).state);
     }
 }

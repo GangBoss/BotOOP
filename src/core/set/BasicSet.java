@@ -23,14 +23,9 @@ public abstract class BasicSet<V, T>
         return set.containsKey(key);
     }
 
-    public Collection<T> getAll()
+    public Stream<T> getAll()
     {
-        return set.values();
-    }
-
-    public Stream<T> getAll(Function<T,Boolean> func)
-    {
-      return set.values().stream().filter(func::apply);
+        return set.values().stream();
     }
 }
 
