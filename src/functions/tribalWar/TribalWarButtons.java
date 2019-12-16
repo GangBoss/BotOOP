@@ -1,20 +1,14 @@
 package functions.tribalWar;
 
+import core.ButtonsProvider;
 import core.DataBase;
-import core.User;
 
-import java.lang.reflect.Array;
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 
-class TribalWarButtons
+class TribalWarButtons extends ButtonsProvider<TribalWarState, TribalWarData>
 {
-    private final HashMap<TribalWarState, List<String>> buttons;
-    private DataBase<TribalWarData> dataBase;
-
     TribalWarButtons(DataBase<TribalWarData> dataBase)
     {
         this.dataBase = dataBase;
@@ -27,14 +21,5 @@ class TribalWarButtons
                     "/exit"
             ));
         }};
-    }
-
-    List<String> getButtons(User user)
-    {
-        var userState = dataBase.get(user).state;
-        if (!buttons.containsKey(userState))
-            return new ArrayList<>();
-        return buttons.get(userState);
-
     }
 }

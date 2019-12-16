@@ -1,8 +1,16 @@
 package functions.anonymous;
 
-public enum AnonymousState
+import core.Statable;
+
+public enum AnonymousState implements Statable<AnonymousState>
 {
     Menu,
     Searching,
-    InPair
+    InPair;
+
+    @Override
+    public AnonymousState getState()
+    {
+        return this;
+    }
 }

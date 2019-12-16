@@ -1,24 +1,20 @@
 package functions.anonymous;
 
+import core.ButtonsProvider;
 import core.DataBase;
-import core.User;
 
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
-class AnonymousButtons
+class AnonymousButtons extends ButtonsProvider<AnonymousState, AnonymousState>
 {
-    private HashMap<AnonymousState, List<String>> buttons;
-    private DataBase<AnonymousState> dataBase;
-
     AnonymousButtons(DataBase<AnonymousState> dataBase)
     {
         this.dataBase = dataBase;
         buttons = new HashMap<>()
         {{
             put(AnonymousState.InPair, Arrays.asList(
+                    "/exit",
                     "/exit",
                     "/searching",
                     "/abandonchat"
@@ -33,15 +29,6 @@ class AnonymousButtons
                     "/exit"
             ));
         }};
-
-    }
-
-    List<String> getButtons(User user)
-    {
-        if (!buttons.containsKey(dataBase.get(user)))
-            return new ArrayList<>();
-
-        return buttons.get(dataBase.get(user));
     }
 }
 

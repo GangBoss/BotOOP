@@ -1,19 +1,17 @@
 package functions.quiz;
 
+import core.ButtonsProvider;
 import core.DataBase;
 import core.User;
+import functions.anonymous.AnonymousState;
 
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
-class QuizButtons
+class QuizButtons extends ButtonsProvider<QuizState, QuizData>
 {
-    private HashMap<QuizState, List<String>> buttons;
-
-    private DataBase<QuizData> dataBase;
-
     QuizButtons(DataBase<QuizData> dataBase)
     {
         this.dataBase = dataBase;
@@ -30,13 +28,5 @@ class QuizButtons
             ));
         }};
 
-    }
-
-    List<String> getButtons(User user)
-    {
-        if (!buttons.containsKey(dataBase.get(user).state))
-            return new ArrayList<>();
-
-        return buttons.get(dataBase.get(user).state);
     }
 }

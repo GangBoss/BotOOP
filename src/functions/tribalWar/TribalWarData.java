@@ -1,10 +1,11 @@
 package functions.tribalWar;
 
+import core.Statable;
 import functions.tribalWar.VillageConfiguration.Village;
 
-class TribalWarData
+class TribalWarData implements Statable<TribalWarState>
 {
-    TribalWarState state;
+    private TribalWarState state;
     Village village;
 
 
@@ -12,5 +13,11 @@ class TribalWarData
     {
         this.village = village;
         this.state = state;
+    }
+
+    @Override
+    public TribalWarState getState()
+    {
+        return state;
     }
 }
