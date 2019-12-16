@@ -6,9 +6,7 @@ import core.MessageHandler;
 import core.User;
 import data.user.UserDatabase;
 import functions.groupChat.GroupChat;
-import functions.groupChat.Group;
 
-import javax.swing.*;
 import java.util.*;
 
 public class AnonymousSearcher
@@ -18,7 +16,7 @@ public class AnonymousSearcher
     private GroupChat groupChat;
     private MessageHandler bot;
     private DataBase<AnonymousState> dataBase;
-    private final int count = 2;
+    private final int SEARCHERS_COUNT = 2;
 
     AnonymousSearcher(MessageHandler bot, DataBase<AnonymousState> dataBase)
     {
@@ -65,9 +63,9 @@ public class AnonymousSearcher
             searchers.push(user);
             dataBase.put(user, AnonymousState.Searching);
             bot.sendMessage(new Message("You are searching a pair  searchers: " + searchers.size(), user));
-            if (searchers.size() >= count)
+            if (searchers.size() >= SEARCHERS_COUNT)
             {
-                var group = getUserGroup(searchers, count);
+                var group = getUserGroup(searchers, SEARCHERS_COUNT);
                 for (var u:group)
                 {
                     dataBase.put(u, AnonymousState.InPair);
