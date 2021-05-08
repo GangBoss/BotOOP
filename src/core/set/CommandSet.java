@@ -16,7 +16,7 @@ public class CommandSet extends BasicSet<String, CommandBase>
     public CommandSet(int prefixCount, int suffixLength, String commandPrefix){
         set = new HashMap<>();
         this.commandPrefix = commandPrefix;
-        add(new ListCommand(this), 7);
+        add(new ListCommand(this), "command".length());
         this.prefixCount = prefixCount;
         this.suffixLength = suffixLength;
     }

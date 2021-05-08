@@ -6,7 +6,6 @@ import java.util.List;
 
 public  abstract  class ButtonsProvider<State, Data extends Statable<State>>
 {
-    //Как сказать что Data:Statable
     protected DataBase<Data> dataBase;
     protected HashMap<State, List<String>> buttons;
     public List<String> getButtons(User user)

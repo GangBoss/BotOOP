@@ -4,7 +4,6 @@ import core.Bot;
 import core.set.BasicSet;
 import functions.anonymous.Anonymous;
 import functions.quiz.Quiz;
-import functions.tribalWar.TribalWar;
 
 import java.util.HashMap;
 
@@ -16,7 +15,6 @@ public class FunctionSet extends BasicSet<FunctionType, BaseFunction>
 
         add(new Quiz(bot));
         add(new Anonymous(bot));
-        add(new TribalWar(bot));
     }
 
     @Override

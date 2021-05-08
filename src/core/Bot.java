@@ -20,14 +20,12 @@ public class Bot extends Runner implements MessageHandler
     private HandlerSet handlers;
     private FunctionSet games;
     private Thread handleThread;
-    private Thread timerThread;
 
     public Bot(boolean withUser) throws Exception
     {
         handlers = new HandlerSet(this, withUser);
         games = new FunctionSet(this);
         handleThread = new Thread(this::handleDeque);
-        timerThread = new Thread(this::update);
     }
 
     public void start()
@@ -37,7 +35,6 @@ public class Bot extends Runner implements MessageHandler
         isStopped = false;
         System.out.println("Starting...");
         handleThread.start();
-        timerThread.start();
         System.out.println("Started!");
         handlers.start();
     }
@@ -121,30 +118,11 @@ public class Bot extends Runner implements MessageHandler
         }
     }
 
-    private void update()
-    {
-        while (!isStopped)
-        {
-            games.getAll()
-                    .filter(r-> r instanceof Updatable)
-                    .map(r -> ((Updatable) r))
-                    .forEach(Updatable::update);
-            try
-            {
-                Thread.sleep(60000);
-            } catch (InterruptedException e)
-            {
-                e.printStackTrace();
-            }
-        }
-    }
-
     private List<String> getDefaultButtons(User user)
     {
         return Arrays.asList(
                 "/quiz",
                 "/anonymous",
-                "/tribalwar",
                 "/list");
     }
 }

@@ -26,8 +26,6 @@ public class Anonymous extends BaseFunction
         this.bot = bot;
         buttons = new AnonymousButtons(dataBase);
         this.searcher = new AnonymousSearcher(bot,dataBase);
-
-
     }
 
     @Override
