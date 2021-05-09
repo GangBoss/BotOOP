@@ -13,6 +13,5 @@ public class BotCommandSet extends CommandSet
         add(new QuizCommand());
         add(new ExitCommand());
         add(new StartCommand());
-        add(new AnonymousCommand());
     }
 }

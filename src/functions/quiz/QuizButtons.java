@@ -2,13 +2,8 @@ package functions.quiz;
 
 import core.ButtonsProvider;
 import core.DataBase;
-import core.User;
-import functions.anonymous.AnonymousState;
-
-import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.HashMap;
-import java.util.List;
 
 class QuizButtons extends ButtonsProvider<QuizState, QuizData>
 {
