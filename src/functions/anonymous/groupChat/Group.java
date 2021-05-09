@@ -1,4 +1,4 @@
-package functions.groupChat;
+package functions.anonymous.groupChat;
 
 import core.Id;
 import core.Message;

@@ -1,10 +1,9 @@
-package functions.groupChat;
+package functions.anonymous.groupChat;
 
 import core.Message;
 import core.MessageHandler;
 import core.User;
 import data.user.UserDatabase;
-import handlers.BaseHandler;
 
 import java.util.ArrayList;
 import java.util.HashMap;

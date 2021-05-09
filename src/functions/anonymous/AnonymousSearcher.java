@@ -5,7 +5,7 @@ import core.Message;
 import core.MessageHandler;
 import core.User;
 import data.user.UserDatabase;
-import functions.groupChat.GroupChat;
+import functions.anonymous.groupChat.GroupChat;
 
 import java.util.*;
 
