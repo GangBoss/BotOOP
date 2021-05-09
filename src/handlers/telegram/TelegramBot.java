@@ -65,21 +65,6 @@ public class TelegramBot extends TelegramLongPollingBot
         {
             System.out.println("Cant send message");
         }
-        if(message.hasPhoto()){
-            var path=message.getPhotoPath();
-            var photo=new File(path);
-            SendPhoto sendPhoto=new SendPhoto().setChatId((Long) message.id.getId()).setPhoto(photo);
-            try
-            {
-                execute(sendPhoto);
-            } catch (TelegramApiException e)
-            {
-                e.printStackTrace();
-            }
-        }
-
-
-
     }
 
 
