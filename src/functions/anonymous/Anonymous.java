@@ -4,12 +4,10 @@ import core.DataBase;
 import core.Message;
 import core.MessageHandler;
 import core.User;
-import data.user.UserDatabase;
-import functions.BaseFunction;
+import core.BaseFunction;
 import functions.FunctionType;
 import functions.anonymous.commands.AnonymousCommandSet;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Anonymous extends BaseFunction

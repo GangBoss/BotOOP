@@ -2,7 +2,6 @@ package core;
 
 import data.botCommands.BotCommandSet;
 import data.user.UserDatabase;
-import functions.BaseFunction;
 import functions.FunctionSet;
 import functions.FunctionType;
 import handlers.HandlerSet;
@@ -10,7 +9,6 @@ import handlers.HandlerSet;
 import java.util.Arrays;
 import java.util.List;
 import java.util.concurrent.ConcurrentLinkedDeque;
-import java.util.function.Predicate;
 
 
 public class Bot extends Runner implements MessageHandler

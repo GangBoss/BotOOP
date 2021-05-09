@@ -1,9 +1,10 @@
-package functions;
+package core;
 
 import core.Message;
 import core.MessageHandler;
 import core.User;
 import data.user.UserDatabase;
+import functions.FunctionType;
 import org.telegram.telegrambots.meta.api.objects.replykeyboard.buttons.KeyboardRow;
 
 import java.util.ArrayList;
@@ -13,7 +14,7 @@ import java.util.Objects;
 public abstract class BaseFunction implements MessageHandler
 {
     protected MessageHandler bot;
-    protected FunctionType type;
+    public FunctionType type;
 
     public FunctionType getType()
     {

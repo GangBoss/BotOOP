@@ -1,5 +1,6 @@
 package functions;
 
+import core.BaseFunction;
 import core.Bot;
 import core.set.BasicSet;
 import functions.anonymous.Anonymous;

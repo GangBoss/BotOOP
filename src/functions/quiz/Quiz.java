@@ -5,11 +5,10 @@ import core.Message;
 import core.MessageHandler;
 import core.User;
 import data.user.UserDatabase;
-import functions.BaseFunction;
+import core.BaseFunction;
 import functions.FunctionType;
 import functions.quiz.commands.QuizCommandSet;
 
-import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Random;
